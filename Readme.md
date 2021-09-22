@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Рамзан Курбанов](https://up.htmlacademy.ru/javascript/24/user/1773559).
-* Наставник: `Неизвестно`.
+* Наставник: [Магомед Кандаев](https://htmlacademy.ru/profile/magomedkandaev).
 
 ---
 
