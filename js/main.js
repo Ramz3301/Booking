@@ -6,4 +6,4 @@ function getRandomNumber (min, max) {
   }
 }
 
-getRandomNumber(10, 100);
+getRandomNumber();
