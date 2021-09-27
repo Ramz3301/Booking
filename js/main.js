@@ -7,3 +7,14 @@ function getRandomNumber (min, max) {
 }
 
 getRandomNumber();
+
+function getFloatingNumber (min, max, decimalPoint) {
+  if (min < 0 || min >= max) {
+    return false;
+  } else {
+    const randomNumber = Math.random() * (max - min + 1) + min;
+    return randomNumber.toFixed(decimalPoint);
+  }
+}
+
+getFloatingNumber();
