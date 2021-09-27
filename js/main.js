@@ -12,7 +12,7 @@ function getFloatingNumber (min, max, decimalPoint) {
     return false;
   }
   const randomNumber = Math.random() * (max - min + 1) + min;
-  return randomNumber.toFixed(decimalPoint);
+  return +randomNumber.toFixed(decimalPoint);
 }
 
 getFloatingNumber();
