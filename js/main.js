@@ -1,18 +1,18 @@
-function getRandomInRange (min, max) {
+function checkRange (min, max) {
   if (min < 0 || min >= max) {
-    return false;
+    throw new Error('Недопустимый диапазон');
   }
-  return Math.random() * (max - min) + min;
 }
 
 function getRandomInteger (min, max) {
-  return Math.ceil(getRandomInRange(min, max));
+  checkRange(min, max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function getFloatingNumber (min, max, decimalPoint) {
+  checkRange(min, max);
+  return Number((Math.random() * (max - min) + min).toFixed(decimalPoint));
 }
 
 getRandomInteger();
-
-function getFloatingNumber (min, max, decimalPoint) {
-  return Number(getRandomInRange(min, max).toFixed(decimalPoint));
-}
-
 getFloatingNumber();
