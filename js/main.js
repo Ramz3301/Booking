@@ -1,18 +1,18 @@
-function getRandomNumber (min, max) {
+function getRandomInRange (min, max) {
   if (min < 0 || min >= max) {
     return false;
   }
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.random() * (max - min) + min;
 }
 
-getRandomNumber();
+function getRandomInteger (min, max) {
+  return Math.ceil(getRandomInRange(min, max));
+}
+
+getRandomInteger();
 
 function getFloatingNumber (min, max, decimalPoint) {
-  if (min < 0 || min >= max) {
-    return false;
-  }
-  const randomNumber = Math.random() * (max - min + 1) + min;
-  return +randomNumber.toFixed(decimalPoint);
+  return Number(getRandomInRange(min, max).toFixed(decimalPoint));
 }
 
 getFloatingNumber();
