@@ -1,18 +1,21 @@
-function checkRange (min, max) {
-  if (min < 0 || min >= max) {
-    throw new Error('Недопустимый диапазон');
-  }
+function getRandomPositiveInteger (min, max) {
+
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+
+  return Math.floor(result);
 }
 
-function getRandomInteger (min, max) {
-  checkRange(min, max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
+getRandomPositiveInteger();
+
+function getRandomPositiveFloat (min, max, digits = 1) {
+  const lower = Math.min(Math.abs(min), Math.abs(max));
+  const upper = Math.max(Math.abs(min), Math.abs(max));
+
+  const result = Math.random() * (upper - lower) + lower;
+
+  return result.toFixed(digits);
 }
 
-function getFloatingNumber (min, max, decimalPoint) {
-  checkRange(min, max);
-  return Number((Math.random() * (max - min) + min).toFixed(decimalPoint));
-}
-
-getRandomInteger();
-getFloatingNumber();
+getRandomPositiveFloat();
