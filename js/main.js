@@ -18,23 +18,24 @@ const AUTHOR = {
   avatar: `img/avatars/user${  getRandomPositiveInteger(1, 10)  }.png`,
 };
 
-const locationA = {
+const locationAddress = {
   lat: getRandomPositiveFloat(35.65, 35.7, 5),
   lng: getRandomPositiveFloat(139.7, 139.8, 5),
 };
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
+const SIMILAR_ADS_COUNT = 10;
 const CHECKIN = ['12:00', '13:00', '14:00'];
 const CHECKOUT = ['12:00', '13:00', '14:00'];
-const TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
 // https://qastack.ru/programming/2450954/how-to-randomize-shuffle-a-javascript-array Функция взята отсюда
 
-function shuffle(array) {
-  let currentIndex = array.length, temporaryValue, randomIndex;
+function shuffle(elements) {
+  let currentIndex = elements.length, temporaryValue, randomIndex;
 
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
@@ -44,19 +45,19 @@ function shuffle(array) {
     currentIndex -= 1;
 
     // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+    temporaryValue = elements[currentIndex];
+    elements[currentIndex] = elements[randomIndex];
+    elements[randomIndex] = temporaryValue;
   }
 
-  return array.slice(getRandomArrayElement, array.length);
+  return elements.slice(getRandomArrayElement(0, elements.length - 1), elements.length);
 }
 
 const offer = {
   title: 'Тип жилья',
-  address: locationA.lat + ' ' + locationA.lng,
+  address: 'locationAddress.lat + locationAddress.lng',
   price: getRandomPositiveInteger(70000, 200000),
-  type: getRandomArrayElement(TYPE),
+  type: getRandomArrayElement(TYPES),
   rooms: getRandomPositiveInteger(1, 8),
   guests: getRandomPositiveInteger(1, 10),
   checkin: getRandomArrayElement(CHECKIN),
@@ -66,12 +67,10 @@ const offer = {
   photos: shuffle(PHOTOS),
 };
 
-const SIMILAR_ADS_COUNT = 10;
-
 const createAdvert = () => ({
   author: AUTHOR,
   offer: offer,
-  location: locationA,
+  location: locationAddress,
 });
 
 const similarAds = Array.from({length: SIMILAR_ADS_COUNT}, createAdvert);
