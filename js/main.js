@@ -19,11 +19,6 @@ function normalizeValue(value) {
   return value.toString().length > 1 ? value.toString() : `0${value}`;
 }
 
-const AUTHOR = {
-  // avatar: `img/avatars/user${  getRandomPositiveInteger(1, 10)  }.png`,
-  avatar: `img/avatars/user${  normalizeValue()  }.png`,
-};
-
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 const SIMILAR_ADS_COUNT = 10;
 const CHECKIN = ['12:00', '13:00', '14:00'];
@@ -42,10 +37,18 @@ const LONGITUDE = {
   decimals: 5,
 };
 
-const locationAddress = {
+// const locationAddress = {
+//   lat: getRandomPositiveFloat(LATITUDE.min,LATITUDE.max, LATITUDE.decimals),
+//   lng: getRandomPositiveFloat(LONGITUDE.min, LONGITUDE.max, LONGITUDE.decimals),
+// };
+
+const getRandomLocation = () => ({
   lat: getRandomPositiveFloat(LATITUDE.min,LATITUDE.max, LATITUDE.decimals),
   lng: getRandomPositiveFloat(LONGITUDE.min, LONGITUDE.max, LONGITUDE.decimals),
-};
+});
+
+
+const locationAddress = getRandomLocation();
 
 // https://qastack.ru/programming/2450954/how-to-randomize-shuffle-a-javascript-array Функция взята отсюда
 
@@ -62,35 +65,36 @@ function shuffle(elements) {
     [elements[currentIndex], elements[randomIndex]] = [elements[randomIndex], elements[currentIndex]];
   }
 
+  // return elements.slice(getRandomArrayElement(0, elements.length - 1), elements.length);
   return elements.slice(getRandomArrayElement(0, elements.length - 1), elements.length);
 }
 
-const offer = {
-  title: 'Тип жилья',
-  address: `${locationAddress.lat}, ${locationAddress.lng}`,
-  price: getRandomPositiveInteger(70000, 200000),
-  type: getRandomArrayElement(TYPES),
-  rooms: getRandomPositiveInteger(1, 8),
-  guests: getRandomPositiveInteger(1, 10),
-  checkin: getRandomArrayElement(CHECKIN),
-  checkout: getRandomArrayElement(CHECKOUT),
-  features: shuffle(FEATURES),
-  description: 'Уютное место для жилья в прекрасном городе Токио',
-  photos: shuffle(PHOTOS),
-};
-
-
 const createAdverts = () => ({
-  author: AUTHOR,
-  offer: offer,
-  location: locationAddress,
+  AUTHOR: {
+    avatar: `img/avatars/user${  normalizeValue()  }.png`,
+  },
+  offer: {
+    title: 'Жильё поблизости',
+    address: `${locationAddress.lat}, ${locationAddress.lng}`,
+    price: getRandomPositiveInteger(70000, 200000),
+    type: getRandomArrayElement(TYPES),
+    rooms: getRandomPositiveInteger(1, 8),
+    guests: getRandomPositiveInteger(1, 10),
+    checkin: getRandomArrayElement(CHECKIN),
+    checkout: getRandomArrayElement(CHECKOUT),
+    features: shuffle(FEATURES),
+    description: 'Уютное место для жилья в прекрасном городе Токио',
+    photos: shuffle(PHOTOS),
+  },
+  locationAddress,
 });
-
 
 const similarAdverts = () => {
   const adverts = [];
-  adverts.push(createAdverts());
-
+  for (let index = 0; index < SIMILAR_ADS_COUNT; index++) {
+    createAdverts();
+    adverts.push(createAdverts());
+  }
   return adverts;
 };
 
