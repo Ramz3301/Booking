@@ -43,6 +43,8 @@ const getRandomLocation = () => ({
   lng: getRandomPositiveFloat(LONGITUDE.min, LONGITUDE.max, LONGITUDE.decimals),
 });
 
+const locationAddress = getRandomLocation();
+
 // https://qastack.ru/programming/2450954/how-to-randomize-shuffle-a-javascript-array Функция взята отсюда
 
 function shuffle(elements) {
@@ -67,7 +69,9 @@ const createAdverts = () => ({
   },
   offer: {
     title: 'Жильё поблизости',
-    address: `${getRandomLocation().lat}, ${getRandomLocation().lng}`,
+    address: `${locationAddress.lat}, ${locationAddress.lng}`,
+    // address: `${getRandomLocation().lat}, ${getRandomLocation().lng}`,
+    // address: `${location.lat}, ${location.lng}`,
     price: getRandomPositiveInteger(70000, 200000),
     type: getRandomArrayElement(TYPES),
     rooms: getRandomPositiveInteger(1, 8),
@@ -78,9 +82,8 @@ const createAdverts = () => ({
     description: 'Уютное место для жилья в прекрасном городе Токио',
     photos: shuffle(PHOTOS),
   },
-  locationAddress: {
-    location: getRandomLocation(),
-  },
+  // location: getRandomLocation(),
+  locationAddress,
 });
 
 const similarAdverts = () => {
