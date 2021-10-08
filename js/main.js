@@ -26,6 +26,7 @@ const CHECKOUT = ['12:00', '13:00', '14:00'];
 const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
+
 const LATITUDE = {
   min: 35.65,
   max: 35.7,
@@ -41,9 +42,6 @@ const getRandomLocation = () => ({
   lat: getRandomPositiveFloat(LATITUDE.min,LATITUDE.max, LATITUDE.decimals),
   lng: getRandomPositiveFloat(LONGITUDE.min, LONGITUDE.max, LONGITUDE.decimals),
 });
-
-
-const locationAddress = getRandomLocation();
 
 // https://qastack.ru/programming/2450954/how-to-randomize-shuffle-a-javascript-array Функция взята отсюда
 
@@ -69,7 +67,7 @@ const createAdverts = () => ({
   },
   offer: {
     title: 'Жильё поблизости',
-    address: `${locationAddress.lat}, ${locationAddress.lng}`,
+    address: `${getRandomLocation().lat}, ${getRandomLocation().lng}`,
     price: getRandomPositiveInteger(70000, 200000),
     type: getRandomArrayElement(TYPES),
     rooms: getRandomPositiveInteger(1, 8),
