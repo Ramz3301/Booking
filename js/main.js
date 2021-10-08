@@ -66,7 +66,7 @@ function shuffle(elements) {
   }
 
   // return elements.slice(getRandomArrayElement(0, elements.length - 1), elements.length);
-  return elements.slice(getRandomArrayElement(0, elements.length - 1), elements.length);
+  return elements.slice(getRandomPositiveInteger(0, elements.length - 1), elements.length);
 }
 
 const createAdverts = () => ({
