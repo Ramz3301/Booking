@@ -37,11 +37,6 @@ const LONGITUDE = {
   decimals: 5,
 };
 
-// const locationAddress = {
-//   lat: getRandomPositiveFloat(LATITUDE.min,LATITUDE.max, LATITUDE.decimals),
-//   lng: getRandomPositiveFloat(LONGITUDE.min, LONGITUDE.max, LONGITUDE.decimals),
-// };
-
 const getRandomLocation = () => ({
   lat: getRandomPositiveFloat(LATITUDE.min,LATITUDE.max, LATITUDE.decimals),
   lng: getRandomPositiveFloat(LONGITUDE.min, LONGITUDE.max, LONGITUDE.decimals),
@@ -65,7 +60,6 @@ function shuffle(elements) {
     [elements[currentIndex], elements[randomIndex]] = [elements[randomIndex], elements[currentIndex]];
   }
 
-  // return elements.slice(getRandomArrayElement(0, elements.length - 1), elements.length);
   return elements.slice(getRandomPositiveInteger(0, elements.length - 1), elements.length);
 }
 
@@ -86,7 +80,9 @@ const createAdverts = () => ({
     description: 'Уютное место для жилья в прекрасном городе Токио',
     photos: shuffle(PHOTOS),
   },
-  locationAddress,
+  locationAddress: {
+    location: getRandomLocation(),
+  },
 });
 
 const similarAdverts = () => {
