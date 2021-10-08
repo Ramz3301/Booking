@@ -14,12 +14,17 @@ function getRandomPositiveFloat (min, max, digits = 1) {
   return Number(result.toFixed(digits));
 }
 
+function normalizeValue(value) {
+  value = getRandomPositiveInteger(1,10);
+  return value.toString().length > 1 ? value.toString() : `0${value}`;
+}
+
 const AUTHOR = {
-  avatar: `img/avatars/user${  getRandomPositiveInteger(1, 10)  }.png`,
+  // avatar: `img/avatars/user${  getRandomPositiveInteger(1, 10)  }.png`,
+  avatar: `img/avatars/user${  normalizeValue()  }.png`,
 };
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
-
 const SIMILAR_ADS_COUNT = 10;
 const CHECKIN = ['12:00', '13:00', '14:00'];
 const CHECKOUT = ['12:00', '13:00', '14:00'];
@@ -41,6 +46,7 @@ const locationAddress = {
   lat: getRandomPositiveFloat(LATITUDE.min,LATITUDE.max, LATITUDE.decimals),
   lng: getRandomPositiveFloat(LONGITUDE.min, LONGITUDE.max, LONGITUDE.decimals),
 };
+
 // https://qastack.ru/programming/2450954/how-to-randomize-shuffle-a-javascript-array Функция взята отсюда
 
 function shuffle(elements) {
@@ -53,10 +59,6 @@ function shuffle(elements) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
 
-    // And swap it with the current element.
-    // temporaryValue = elements[currentIndex];
-    // elements[currentIndex] = elements[randomIndex];
-    // elements[randomIndex] = temporaryValue;
     [elements[currentIndex], elements[randomIndex]] = [elements[randomIndex], elements[currentIndex]];
   }
 
@@ -77,12 +79,19 @@ const offer = {
   photos: shuffle(PHOTOS),
 };
 
-const createAdvert = () => ({
+
+const createAdverts = () => ({
   author: AUTHOR,
   offer: offer,
   location: locationAddress,
 });
 
-const similarAds = Array.from({length: SIMILAR_ADS_COUNT}, createAdvert);
 
-similarAds;
+const similarAdverts = () => {
+  const adverts = [];
+  adverts.push(createAdverts());
+
+  return adverts;
+};
+
+similarAdverts();
