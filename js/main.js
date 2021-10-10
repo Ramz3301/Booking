@@ -14,7 +14,6 @@ function getRandomPositiveFloat (min, max, digits = 1) {
   return Number(result.toFixed(digits));
 }
 
-// const authors = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 const SIMILAR_ADS_COUNT = 10;
 const CHECKIN = ['12:00', '13:00', '14:00'];
@@ -22,7 +21,7 @@ const CHECKOUT = ['12:00', '13:00', '14:00'];
 const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
-
+const authors = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const LATITUDE = {
   min: 35.65,
   max: 35.7,
@@ -61,13 +60,11 @@ function sample(elements) {
   return shuffle(elements).slice(getRandomPositiveInteger(0, elements.length - 1), elements.length);
 }
 
-
-const createAdverts = () => {
+const createAdvert = () => {
   const location = getRandomLocation();
-  const authors = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   return {
     author: {
-      avatar: `img/avatars/user${ (authors.shift()).padStart(2,0) }.png`,
+      avatar: `img/avatars/user${ String((authors).shift()).padStart(2,0) }.png`,
     },
     offer: {
       title: 'Жильё поблизости',
@@ -89,11 +86,11 @@ const createAdverts = () => {
 const getSimilarAdverts = () => {
   const adverts = [];
   for (let index = 0; index < SIMILAR_ADS_COUNT; index++) {
-    adverts.push(createAdverts());
+    adverts.push(createAdvert());
   }
   return adverts;
 };
 
-getSimilarAdverts();
+// getSimilarAdverts();
 
-// String(authors.shift()).padStart(2,0)
+console.log(getSimilarAdverts());
