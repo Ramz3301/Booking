@@ -14,11 +14,7 @@ function getRandomPositiveFloat (min, max, digits = 1) {
   return Number(result.toFixed(digits));
 }
 
-function normalizeValue(value) {
-  value = getRandomPositiveInteger(1,10);
-  return value.toString().length > 1 ? value.toString() : `0${value}`;
-}
-
+// const authors = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 const SIMILAR_ADS_COUNT = 10;
 const CHECKIN = ['12:00', '13:00', '14:00'];
@@ -43,8 +39,6 @@ const getRandomLocation = () => ({
   lng: getRandomPositiveFloat(LONGITUDE.min, LONGITUDE.max, LONGITUDE.decimals),
 });
 
-const locationAddress = getRandomLocation();
-
 // https://qastack.ru/programming/2450954/how-to-randomize-shuffle-a-javascript-array Функция взята отсюда
 
 function shuffle(elements) {
@@ -60,39 +54,46 @@ function shuffle(elements) {
     [elements[currentIndex], elements[randomIndex]] = [elements[randomIndex], elements[currentIndex]];
   }
 
-  return elements.slice(getRandomPositiveInteger(0, elements.length - 1), elements.length);
+  return elements;
 }
 
-const createAdverts = () => ({
-  AUTHOR: {
-    avatar: `img/avatars/user${  normalizeValue()  }.png`,
-  },
-  offer: {
-    title: 'Жильё поблизости',
-    address: `${locationAddress.lat}, ${locationAddress.lng}`,
-    // address: `${getRandomLocation().lat}, ${getRandomLocation().lng}`,
-    // address: `${location.lat}, ${location.lng}`,
-    price: getRandomPositiveInteger(70000, 200000),
-    type: getRandomArrayElement(TYPES),
-    rooms: getRandomPositiveInteger(1, 8),
-    guests: getRandomPositiveInteger(1, 10),
-    checkin: getRandomArrayElement(CHECKIN),
-    checkout: getRandomArrayElement(CHECKOUT),
-    features: shuffle(FEATURES),
-    description: 'Уютное место для жилья в прекрасном городе Токио',
-    photos: shuffle(PHOTOS),
-  },
-  // location: getRandomLocation(),
-  locationAddress,
-});
+function sample(elements) {
+  return shuffle(elements).slice(getRandomPositiveInteger(0, elements.length - 1), elements.length);
+}
 
-const similarAdverts = () => {
+
+const createAdverts = () => {
+  const location = getRandomLocation();
+  const authors = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  return {
+    author: {
+      avatar: `img/avatars/user${ (authors.shift()).padStart(2,0) }.png`,
+    },
+    offer: {
+      title: 'Жильё поблизости',
+      address: `${location.lat}, ${location.lng}`,
+      price: getRandomPositiveInteger(70000, 200000),
+      type: getRandomArrayElement(TYPES),
+      rooms: getRandomPositiveInteger(1, 8),
+      guests: getRandomPositiveInteger(1, 10),
+      checkin: getRandomArrayElement(CHECKIN),
+      checkout: getRandomArrayElement(CHECKOUT),
+      features: sample(FEATURES),
+      description: 'Уютное место для жилья в прекрасном городе Токио',
+      photos: sample(PHOTOS),
+    },
+    location,
+  };
+};
+
+const getSimilarAdverts = () => {
   const adverts = [];
   for (let index = 0; index < SIMILAR_ADS_COUNT; index++) {
-    createAdverts();
     adverts.push(createAdverts());
   }
   return adverts;
 };
 
-similarAdverts();
+getSimilarAdverts();
+
+// String(authors.shift()).padStart(2,0)
