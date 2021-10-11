@@ -28,3 +28,4 @@ function getRandomPositiveInteger (min, max) {
 }
 
 getRandomPositiveInteger();
+
