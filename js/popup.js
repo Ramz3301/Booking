@@ -22,23 +22,38 @@ const getPopupType = (offer) => {
 
 const similarListFragment = document.createDocumentFragment();
 
-const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
-const photoFragment = document.createDocumentFragment();
+// const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
+// const photoFragment = document.createDocumentFragment();
+
+// const getPhoto = (offer) => {
+//   // const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
+//   // const photoFragment = document.createDocumentFragment();
+
+//   offer.photos.forEach(() => {
+//     const photoItem = photoContainer.querySelector('.popup__photo');
+//     if (photoItem) {
+//       photoFragment.append(photoItem);
+//     }
+//   });
+//   photoContainer.innerHTML = '';
+//   photoContainer.append(photoFragment);
+// };
 
 const getPhoto = (offer) => {
-  // const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
+  const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
   // const photoFragment = document.createDocumentFragment();
-
-  offer.photos.forEach(() => {
-    const photoItem = photoContainer.querySelector('.popup__photo');
-    if (photoItem) {
-      photoFragment.append(photoItem);
-    }
-  });
   photoContainer.innerHTML = '';
-  photoContainer.append(photoFragment);
-};
 
+  offer.photos.forEach((some) => {
+    const photoItem = document.createElement('img');
+    photoItem.src = some;
+    photoItem.classList.add('popup__photo');
+    photoItem.width = 45;
+    photoItem.height = 40;
+    photoItem.alt = 'Фотография жилья';
+    photoContainer.append(photoItem);
+  });
+};
 
 const hideDescription = (offer) => {
   if (!offer.description) {
@@ -55,7 +70,7 @@ const similarAdvert = (something) => {
     advertElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
     advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
     advertElement.querySelector('.popup__features').textContent = offer.features;
-    // advertElement.querySelector('.popup__description').textContent = offer.description;
+    advertElement.querySelector('.popup__description').textContent = offer.description;
     hideDescription(offer);
     getPhoto(offer);
     advertElement.querySelector('.popup__avatar').src = author.avatar;
