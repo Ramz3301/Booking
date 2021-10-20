@@ -1,8 +1,5 @@
-import { getSimilarAdverts } from './data.js';
-
 const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон
 const similarElement = document.querySelector('#map-canvas'); // Сюда будем вставлять шаблон
-const similarAdverts = getSimilarAdverts(); // Cоздаем объявления
 const advertElement = similarAdvertsTemplate.cloneNode(true);
 
 const convertType = (offer) => {
@@ -44,8 +41,8 @@ const hideDescription = (offer) => {
   }
 };
 
-const similarAdvert = (something) => {
-  something.forEach(({author, offer}) => {
+const getSimilarAdvert = (some) => {
+  some.forEach(({author, offer}) => {
     advertElement.querySelector('.popup__title').textContent = offer.title;
     advertElement.querySelector('.popup__text--address').textContent = offer.address;
     advertElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
@@ -63,6 +60,4 @@ const similarAdvert = (something) => {
 similarListFragment.append(advertElement);
 similarElement.appendChild(similarListFragment);
 
-similarAdvert(similarAdverts);
-
-export {similarAdvert};
+export {getSimilarAdvert};
