@@ -22,23 +22,6 @@ const getPopupType = (offer) => {
 
 const similarListFragment = document.createDocumentFragment();
 
-// const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
-// const photoFragment = document.createDocumentFragment();
-
-// const getPhoto = (offer) => {
-//   // const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
-//   // const photoFragment = document.createDocumentFragment();
-
-//   offer.photos.forEach(() => {
-//     const photoItem = photoContainer.querySelector('.popup__photo');
-//     if (photoItem) {
-//       photoFragment.append(photoItem);
-//     }
-//   });
-//   photoContainer.innerHTML = '';
-//   photoContainer.append(photoFragment);
-// };
-
 const getPhoto = (offer) => {
   const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
   // const photoFragment = document.createDocumentFragment();
