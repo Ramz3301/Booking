@@ -57,10 +57,11 @@ const similarAdvert = (something) => {
     hideDescription(offer);
     getPhoto(offer);
     advertElement.querySelector('.popup__avatar').src = author.avatar;
-    similarListFragment.append(advertElement);
-    similarElement.appendChild(similarListFragment);
   });
 };
+
+similarListFragment.append(advertElement);
+similarElement.appendChild(similarListFragment);
 
 similarAdvert(similarAdverts);
 
