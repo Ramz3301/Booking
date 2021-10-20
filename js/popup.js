@@ -41,8 +41,8 @@ const hideDescription = (offer) => {
   }
 };
 
-const getSimilarAdvert = (some) => {
-  some.forEach(({author, offer}) => {
+const getSimilarAdvert = (similarAdvert) => {
+  similarAdvert.forEach(({author, offer}) => {
     advertElement.querySelector('.popup__title').textContent = offer.title;
     advertElement.querySelector('.popup__text--address').textContent = offer.address;
     advertElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
