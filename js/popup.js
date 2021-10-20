@@ -5,7 +5,7 @@ const similarElement = document.querySelector('#map-canvas'); // Сюда буд
 const similarAdverts = getSimilarAdverts(); // Cоздаем объявления
 const advertElement = similarAdvertsTemplate.cloneNode(true);
 
-const getPopupType = (offer) => {
+const convertType = (offer) => {
   switch (offer.type) {
     case 'flat':
       return 'Квартира';
@@ -49,7 +49,7 @@ const similarAdvert = (something) => {
     advertElement.querySelector('.popup__title').textContent = offer.title;
     advertElement.querySelector('.popup__text--address').textContent = offer.address;
     advertElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
-    advertElement.querySelector('.popup__type').textContent = getPopupType(offer);
+    advertElement.querySelector('.popup__type').textContent = convertType(offer);
     advertElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
     advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
     advertElement.querySelector('.popup__features').textContent = offer.features;
