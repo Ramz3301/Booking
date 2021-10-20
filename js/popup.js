@@ -19,7 +19,7 @@ const convertType = (offer) => {
 
 const similarListFragment = document.createDocumentFragment();
 
-const getPhoto = (offer) => {
+const createPhoto = (offer) => {
   const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
   // const photoFragment = document.createDocumentFragment();
   photoContainer.innerHTML = '';
@@ -52,7 +52,7 @@ const getSimilarAdvert = (some) => {
     advertElement.querySelector('.popup__features').textContent = offer.features;
     advertElement.querySelector('.popup__description').textContent = offer.description;
     hideDescription(offer);
-    getPhoto(offer);
+    createPhoto(offer);
     advertElement.querySelector('.popup__avatar').src = author.avatar;
   });
 };
