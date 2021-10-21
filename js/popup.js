@@ -19,27 +19,41 @@ const convertType = (offer) => {
 
 const similarListFragment = document.createDocumentFragment();
 
-const createPhoto = (offer) => {
-  const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
-  // const photoFragment = document.createDocumentFragment();
-  photoContainer.innerHTML = '';
-
-  offer.photos.forEach((some) => {
-    const photoItem = document.createElement('img');
-    photoItem.src = some;
-    photoItem.classList.add('popup__photo');
-    photoItem.width = 45;
-    photoItem.height = 40;
-    photoItem.alt = 'Фотография жилья';
-    photoContainer.append(photoItem);
+const createPhoto = (photoArray) => {
+  const photoContainer = document.querySelector('.popup__features');
+  const photoFragment = document.createDocumentFragment();
+  photoArray.forEach(() => {
+    const photoItem  = photoContainer.querySelector('.popup__photo');
+    if (photoItem) {
+      photoFragment.append(photoItem);
+    }
   });
+  photoContainer.innerHTML = '';
+  photoContainer.append(photoFragment);
 };
 
-const hideDescription = (offer) => {
-  if (!offer.description) {
-    advertElement.querySelector('.popup__description').style = 'display: none';
-  }
+const createFeatures = (offer) => {
+  const featuresContainer = similarAdvertsTemplate.querySelector('.popup__features');
+  const featuresListFragment = document.createDocumentFragment();
+  offer.forEach((feature) => {
+    const featureItem = featuresContainer.querySelector(`.popup__feature--${feature}`);
+    if (featureItem) {
+      featuresListFragment.append(featureItem);
+    }
+  });
+  featuresContainer.innerHTML = '';
+  featuresContainer.append(featuresListFragment);
 };
+
+
+// const hideEmptyElements = (data) => {
+//   const elements  = [...data.children];
+//   elements.forEach((element) => {
+//     if (!element) {
+//       element.style = 'display: none';
+//     }
+//   });
+// };
 
 const getSimilarAdvert = (similarAdvert) => {
   similarAdvert.forEach(({author, offer}) => {
@@ -49,10 +63,9 @@ const getSimilarAdvert = (similarAdvert) => {
     advertElement.querySelector('.popup__type').textContent = convertType(offer);
     advertElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
     advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-    advertElement.querySelector('.popup__features').textContent = offer.features;
+    createFeatures(offer.features);
     advertElement.querySelector('.popup__description').textContent = offer.description;
-    hideDescription(offer);
-    createPhoto(offer);
+    createPhoto(offer.photos);
     advertElement.querySelector('.popup__avatar').src = author.avatar;
   });
 };
