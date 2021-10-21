@@ -32,22 +32,6 @@ const createPhoto = (photoArray) => {
   photoContainer.append(photoFragment);
 };
 
-// const createPhoto = (photoArray) => {
-//   const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
-//   const photoList = photoContainer.querySelector('.popup__photo');
-//   // const photoFragment = document.createDocumentFragment();
-//   photoList.forEach((photoItem) => {
-//     const isNecessary = photoArray.some(
-//       () => photoItem.classList.contains('popup__photo'),
-//     );
-
-//     if (!isNecessary) {
-//       photoItem.remove();
-//     }
-//   });
-// };
-
-
 const createFeatures = (offer) => {
   const featuresContainer = similarAdvertsTemplate.querySelector('.popup__features');
   const featuresListFragment = document.createDocumentFragment();
@@ -61,29 +45,8 @@ const createFeatures = (offer) => {
   featuresContainer.append(featuresListFragment);
 };
 
-// const createFeatures = (offer) => {
-//   const featuresContainer = similarAdvertsTemplate.querySelector('.popup__features');
-//   const featuresList = featuresContainer.querySelectorAll('.popup__feature');
-//   const modifiers = offer.map((feature) => `popup__feature--${feature}`);
-//   featuresList.forEach ((featuresListItem) => {
-//     const modifier = featuresListItem.classList[1];
-
-//     if (!modifiers.includes(modifier)) {
-//       featuresListItem.remove();
-//     }
-//   });
-// };
-
-// const hideEmptyElements = (data) => {
-//   const elements  = [...data.children];
-//   elements.forEach((element) => {
-//     if (!element) {
-//       element.classList.add('hidden');
-//     }
-//   });
-// };
-
 const getSimilarAdvert = (similarAdvert) => {
+
   similarAdvert.forEach(({author, offer}) => {
     advertElement.querySelector('.popup__title').textContent = offer.title;
     advertElement.querySelector('.popup__text--address').textContent = offer.address;
@@ -92,10 +55,8 @@ const getSimilarAdvert = (similarAdvert) => {
     advertElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
     advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
     advertElement.querySelector('.popup__description').textContent = offer.description;
-    advertElement.querySelector('.popup__photos').innerHTML = '';
-    advertElement.querySelector('.popup__features').innerHTML = '';
-    createFeatures(offer);
-    createPhoto(offer);
+    createFeatures(offer.feature);
+    createPhoto(offer.photos);
     advertElement.querySelector('.popup__avatar').src = author.avatar;
   });
 };
