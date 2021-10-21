@@ -20,7 +20,7 @@ const convertType = (offer) => {
 const similarListFragment = document.createDocumentFragment();
 
 const createPhoto = (photoArray) => {
-  const photoContainer = document.querySelector('.popup__features');
+  const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
   const photoFragment = document.createDocumentFragment();
   photoArray.forEach(() => {
     const photoItem  = photoContainer.querySelector('.popup__photo');
@@ -31,6 +31,22 @@ const createPhoto = (photoArray) => {
   photoContainer.innerHTML = '';
   photoContainer.append(photoFragment);
 };
+
+// const createPhoto = (photoArray) => {
+//   const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
+//   const photoList = photoContainer.querySelector('.popup__photo');
+//   // const photoFragment = document.createDocumentFragment();
+//   photoList.forEach((photoItem) => {
+//     const isNecessary = photoArray.some(
+//       () => photoItem.classList.contains('popup__photo'),
+//     );
+
+//     if (!isNecessary) {
+//       photoItem.remove();
+//     }
+//   });
+// };
+
 
 const createFeatures = (offer) => {
   const featuresContainer = similarAdvertsTemplate.querySelector('.popup__features');
@@ -45,12 +61,24 @@ const createFeatures = (offer) => {
   featuresContainer.append(featuresListFragment);
 };
 
+// const createFeatures = (offer) => {
+//   const featuresContainer = similarAdvertsTemplate.querySelector('.popup__features');
+//   const featuresList = featuresContainer.querySelectorAll('.popup__feature');
+//   const modifiers = offer.map((feature) => `popup__feature--${feature}`);
+//   featuresList.forEach ((featuresListItem) => {
+//     const modifier = featuresListItem.classList[1];
+
+//     if (!modifiers.includes(modifier)) {
+//       featuresListItem.remove();
+//     }
+//   });
+// };
 
 // const hideEmptyElements = (data) => {
 //   const elements  = [...data.children];
 //   elements.forEach((element) => {
 //     if (!element) {
-//       element.style = 'display: none';
+//       element.classList.add('hidden');
 //     }
 //   });
 // };
@@ -63,9 +91,11 @@ const getSimilarAdvert = (similarAdvert) => {
     advertElement.querySelector('.popup__type').textContent = convertType(offer);
     advertElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
     advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
-    createFeatures(offer.features);
     advertElement.querySelector('.popup__description').textContent = offer.description;
-    createPhoto(offer.photos);
+    advertElement.querySelector('.popup__photos').innerHTML = '';
+    advertElement.querySelector('.popup__features').innerHTML = '';
+    createFeatures(offer);
+    createPhoto(offer);
     advertElement.querySelector('.popup__avatar').src = author.avatar;
   });
 };
