@@ -18,7 +18,7 @@ const convertType = (offer) => {
   }
 };
 
-const createPhoto = (element ,photos) => {
+const createPhoto = (element, photos) => {
   const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
   photoContainer.innerHTML = '';
   photos.forEach((photoSource) => {
@@ -28,11 +28,12 @@ const createPhoto = (element ,photos) => {
     photoItem.width = 45;
     photoItem.height = 40;
     photoItem.alt = 'Фотография жилья';
-    element.querySelector('.popup__photos').appendChild(photoItem);
+    element.querySelector('.popup__photos').append(photoItem);
+    // photoContainer.append(photoItem);
   });
 };
 
-const createFeatures = (element,features) => {
+const createFeatures = (element, features) => {
   const featuresContainer = advertElement.querySelector('.popup__features');
   featuresContainer.innerHTML = '';
   features.forEach((feature) => {
@@ -43,13 +44,20 @@ const createFeatures = (element,features) => {
   });
 };
 
-const hideEmptyElement = (offer) => {
-  if (!offer.description) {
-    advertElement.querySelector('.popup__description').classList.add('hidden');
-  }
-};
+// const isEmpty = (value, htmlClass) => {
+//   if (!value) {
+//     advertElement.querySelector(htmlClass).classList.add('hidden');
+//   }
+// };
+
+// const hideEmptyElement = (offer, value, htmlClass) => {
+//   if (!offer.value) {
+//     advertElement.querySelector(htmlClass).classList.add('hidden');
+//   }
+// };
 
 const createSimilarAdvert = ({author, offer}) => {
+  advertElement.querySelector('.popup__avatar').src = author.avatar;
   advertElement.querySelector('.popup__title').textContent = offer.title;
   advertElement.querySelector('.popup__text--address').textContent = offer.address;
   advertElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь`;
@@ -59,8 +67,6 @@ const createSimilarAdvert = ({author, offer}) => {
   advertElement.querySelector('.popup__description').textContent = offer.description;
   createFeatures(advertElement, offer.features);
   createPhoto(advertElement, offer.photos);
-  advertElement.querySelector('.popup__avatar').src = author.avatar;
-  // hideEmptyElement();
 };
 
 similarListFragment.append(advertElement);
