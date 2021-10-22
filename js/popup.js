@@ -18,11 +18,12 @@ const convertType = (offer) => {
   }
 };
 
+
 const createPhoto = (element, photos) => {
   const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
   photoContainer.innerHTML = '';
+  const photoItem = document.createElement('img');
   photos.forEach((photoSource) => {
-    const photoItem = document.createElement('img');
     photoItem.src = photoSource;
     photoItem.classList.add('popup__photo');
     photoItem.width = 45;
