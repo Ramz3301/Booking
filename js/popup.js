@@ -1,7 +1,6 @@
 const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон
 const similarElement = document.querySelector('#map-canvas'); // Сюда будем вставлять шаблон
 const advertElement = similarAdvertsTemplate.cloneNode(true);
-const similarListFragment = document.createDocumentFragment();
 
 const convertType = (offer) => {
   switch (offer.type) {
@@ -20,7 +19,7 @@ const convertType = (offer) => {
 
 
 const createPhoto = (element, photos) => {
-  const photoContainer = similarAdvertsTemplate.querySelector('.popup__photos');
+  const photoContainer = element.querySelector('.popup__photos');
   photoContainer.innerHTML = '';
   const photoItem = document.createElement('img');
   photos.forEach((photoSource) => {
@@ -29,33 +28,20 @@ const createPhoto = (element, photos) => {
     photoItem.width = 45;
     photoItem.height = 40;
     photoItem.alt = 'Фотография жилья';
-    element.querySelector('.popup__photos').append(photoItem);
-    // photoContainer.append(photoItem);
+    photoContainer.append(photoItem);
   });
 };
 
 const createFeatures = (element, features) => {
-  const featuresContainer = advertElement.querySelector('.popup__features');
+  const featuresContainer = element.querySelector('.popup__features');
   featuresContainer.innerHTML = '';
   features.forEach((feature) => {
     const featureItem = document.createElement('li');
     featureItem.classList.add('popup__feature');
     featureItem.classList.add(`popup__feature--${feature}`);
-    element.querySelector('.popup__features').appendChild(featureItem);
+    featuresContainer.append(featureItem);
   });
 };
-
-// const isEmpty = (value, htmlClass) => {
-//   if (!value) {
-//     advertElement.querySelector(htmlClass).classList.add('hidden');
-//   }
-// };
-
-// const hideEmptyElement = (offer, value, htmlClass) => {
-//   if (!offer.value) {
-//     advertElement.querySelector(htmlClass).classList.add('hidden');
-//   }
-// };
 
 const createSimilarAdvert = ({author, offer}) => {
   advertElement.querySelector('.popup__avatar').src = author.avatar;
@@ -68,9 +54,7 @@ const createSimilarAdvert = ({author, offer}) => {
   advertElement.querySelector('.popup__description').textContent = offer.description;
   createFeatures(advertElement, offer.features);
   createPhoto(advertElement, offer.photos);
+  similarElement.append(advertElement);
 };
-
-similarListFragment.append(advertElement);
-similarElement.appendChild(similarListFragment);
 
 export {createSimilarAdvert};
