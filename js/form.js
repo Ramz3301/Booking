@@ -2,7 +2,6 @@ const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const form = document.querySelector('.ad-form');
 const inputAdvertTitle = form.querySelector('#title');
-const roomSelect = form.querySelector('#room_number');
 const capacitySelect = form.querySelector('#capacity');
 const price = form.querySelector('#price');
 
@@ -30,25 +29,26 @@ function checkMaxPrice() {
 
 function checkRoomsCapacity () {
   const capacityOption = capacitySelect.querySelectorAll('option');
-  capacityOption[0].setAttribute('disabled', 'disabled');
-  capacityOption[1].setAttribute('disabled', 'disabled');
-  capacityOption[3].setAttribute('disabled', 'disabled');
+  const roomSelect = form.querySelector('#room_number');
   roomSelect.addEventListener('change', function () {
     const valueNumber = this.value;
     if (valueNumber === '1') {
-      // capacityOption[0].setAttribute('disabled', 'disabled');
-      // capacityOption[1].setAttribute('disabled', 'disabled');
-      // capacityOption[3].setAttribute('disabled', 'disabled');
-      console.log('hi');
+      capacityOption[0].setAttribute('disabled', 'disabled');
+      capacityOption[1].setAttribute('disabled', 'disabled');
+      capacityOption[3].setAttribute('disabled', 'disabled');
     } else if (valueNumber === '2') {
       capacityOption[0].setAttribute('disabled', 'disabled');
       capacityOption[3].setAttribute('disabled', 'disabled');
     } else if (valueNumber === '3') {
+      capacityOption[0].removeAttribute('disabled');
+      capacityOption[1].removeAttribute('disabled');
+      capacityOption[2].removeAttribute('disabled');
       capacityOption[3].setAttribute('disabled', 'disabled');
     } else if (valueNumber === '100') {
       capacityOption[0].setAttribute('disabled', 'disabled');
       capacityOption[1].setAttribute('disabled', 'disabled');
       capacityOption[2].setAttribute('disabled', 'disabled');
+      capacityOption[3].removeAttribute('disabled');
     }
     capacitySelect.setCustomValidity('');
   });
