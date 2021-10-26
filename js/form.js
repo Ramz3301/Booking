@@ -41,6 +41,7 @@ const checkRoomsCapacity = () => {
       capacityOption[1].setAttribute('disabled', 'disabled');
       capacityOption[2].removeAttribute('disabled');
       capacityOption[3].setAttribute('disabled', 'disabled');
+      capacitySelect.value = roomOption[0].value;
     } else if (valueNumber === '2') {
       capacityOption[1].removeAttribute('disabled');
       capacityOption[2].removeAttribute('disabled');
@@ -56,8 +57,9 @@ const checkRoomsCapacity = () => {
       capacityOption[1].setAttribute('disabled', 'disabled');
       capacityOption[2].setAttribute('disabled', 'disabled');
       capacityOption[3].removeAttribute('disabled');
+      capacitySelect.value = roomOption[3].value;
     }
-    // capacitySelect.setCustomValidity('');
+    capacitySelect.setCustomValidity('');
   });
 };
 
