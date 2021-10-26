@@ -33,10 +33,13 @@ function checkRoomsCapacity () {
   roomSelect.addEventListener('change', function () {
     const valueNumber = this.value;
     if (valueNumber === '1') {
+      capacityOption[2].removeAttribute('disabled');
       capacityOption[0].setAttribute('disabled', 'disabled');
       capacityOption[1].setAttribute('disabled', 'disabled');
       capacityOption[3].setAttribute('disabled', 'disabled');
     } else if (valueNumber === '2') {
+      capacityOption[1].removeAttribute('disabled');
+      capacityOption[2].removeAttribute('disabled');
       capacityOption[0].setAttribute('disabled', 'disabled');
       capacityOption[3].setAttribute('disabled', 'disabled');
     } else if (valueNumber === '3') {
