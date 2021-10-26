@@ -2,7 +2,6 @@ const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const form = document.querySelector('.ad-form');
 const inputAdvertTitle = form.querySelector('#title');
-const capacitySelect = form.querySelector('#capacity');
 const price = form.querySelector('#price');
 
 inputAdvertTitle.addEventListener('input', () => {
@@ -17,7 +16,7 @@ inputAdvertTitle.addEventListener('input', () => {
   inputAdvertTitle.reportValidity();
 });
 
-function checkMaxPrice() {
+const checkMaxPrice = () => {
   price.addEventListener('input', () => {
     if (price.value > 1000000) {
       price.setCustomValidity('Максимальное значение - 1000000');
@@ -25,11 +24,13 @@ function checkMaxPrice() {
       price.setCustomValidity('');
     }
   });
-}
+};
 
-function checkRoomsCapacity () {
+const checkRoomsCapacity = () => {
+  const capacitySelect = form.querySelector('#capacity');
   const capacityOption = capacitySelect.querySelectorAll('option');
   const roomSelect = form.querySelector('#room_number');
+  const roomOption = roomSelect.querySelectorAll('option');
   capacityOption[0].setAttribute('disabled', 'disabled');
   capacityOption[1].setAttribute('disabled', 'disabled');
   capacityOption[3].setAttribute('disabled', 'disabled');
@@ -56,9 +57,9 @@ function checkRoomsCapacity () {
       capacityOption[2].setAttribute('disabled', 'disabled');
       capacityOption[3].removeAttribute('disabled');
     }
-    capacitySelect.setCustomValidity('');
+    // capacitySelect.setCustomValidity('');
   });
-}
+};
 
 export {checkMaxPrice};
 export {checkRoomsCapacity};
