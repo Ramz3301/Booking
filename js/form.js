@@ -27,36 +27,37 @@ const checkMaxPrice = () => {
 
 const checkRoomsCapacity = () => {
   const roomSelect = form.querySelector('#room_number');
-  const roomOption = roomSelect.querySelectorAll('option');
   const capacitySelect = form.querySelector('#capacity');
-  const capacityOption = capacitySelect.querySelectorAll('option');
-  capacityOption[0].setAttribute('disabled', 'disabled');
-  capacityOption[1].setAttribute('disabled', 'disabled');
-  capacityOption[3].setAttribute('disabled', 'disabled');
+  const capacityOptions = capacitySelect.querySelectorAll('option');
+  capacityOptions[0].setAttribute('disabled', 'disabled');
+  capacityOptions[1].setAttribute('disabled', 'disabled');
+  capacityOptions[3].setAttribute('disabled', 'disabled');
   roomSelect.addEventListener('change', function () {
     const valueNumber = this.value;
     if (valueNumber === '1') {
-      capacityOption[0].setAttribute('disabled', 'disabled');
-      capacityOption[1].setAttribute('disabled', 'disabled');
-      capacityOption[2].removeAttribute('disabled');
-      capacityOption[3].setAttribute('disabled', 'disabled');
-      capacitySelect.value = roomOption[0].value;
+      capacityOptions[0].setAttribute('disabled', 'disabled');
+      capacityOptions[1].setAttribute('disabled', 'disabled');
+      capacityOptions[2].removeAttribute('disabled');
+      capacityOptions[3].setAttribute('disabled', 'disabled');
+      capacitySelect.value = capacityOptions[2].value;
     } else if (valueNumber === '2') {
-      capacityOption[1].removeAttribute('disabled');
-      capacityOption[2].removeAttribute('disabled');
-      capacityOption[0].setAttribute('disabled', 'disabled');
-      capacityOption[3].setAttribute('disabled', 'disabled');
+      capacityOptions[1].removeAttribute('disabled');
+      capacityOptions[2].removeAttribute('disabled');
+      capacityOptions[0].setAttribute('disabled', 'disabled');
+      capacityOptions[3].setAttribute('disabled', 'disabled');
+      capacitySelect.value = capacityOptions[1].value;
     } else if (valueNumber === '3') {
-      capacityOption[0].removeAttribute('disabled');
-      capacityOption[1].removeAttribute('disabled');
-      capacityOption[2].removeAttribute('disabled');
-      capacityOption[3].setAttribute('disabled', 'disabled');
+      capacityOptions[0].removeAttribute('disabled');
+      capacityOptions[1].removeAttribute('disabled');
+      capacityOptions[2].removeAttribute('disabled');
+      capacityOptions[3].setAttribute('disabled', 'disabled');
+      capacitySelect.value = capacityOptions[0].value;
     } else if (valueNumber === '100') {
-      capacityOption[0].setAttribute('disabled', 'disabled');
-      capacityOption[1].setAttribute('disabled', 'disabled');
-      capacityOption[2].setAttribute('disabled', 'disabled');
-      capacityOption[3].removeAttribute('disabled');
-      // capacitySelect.value = roomOption[3].value; тут не получается почему-то
+      capacityOptions[0].setAttribute('disabled', 'disabled');
+      capacityOptions[1].setAttribute('disabled', 'disabled');
+      capacityOptions[2].setAttribute('disabled', 'disabled');
+      capacityOptions[3].removeAttribute('disabled');
+      capacitySelect.value = capacityOptions[3].value;
     }
     capacitySelect.setCustomValidity('');
   });
