@@ -1,6 +1,9 @@
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const form = document.querySelector('.ad-form');
+const mapFilters = document.querySelector('.map__filters');
+const mapFiltersAll = mapFilters.querySelectorAll('.map__filter');
+const mapFieldsets = mapFilters.querySelectorAll('fieldset');
 const inputAdvertTitle = form.querySelector('#title');
 inputAdvertTitle.addEventListener('input', () => {
   const valueLength = inputAdvertTitle.value.length;
@@ -67,5 +70,20 @@ const initValidation = () => {
   checkMaxPrice();
   checkRoomsCapacity();
 };
+
+const deactivePage = () => {
+  form.classList.add('ad-form--disabled');
+  mapFilters.classList.add('map__filters--disabled');
+  mapFieldsets.forEach((element) => element.disabled = true);
+  mapFiltersAll.forEach((element) => element.disabled = true);
+};
+
+const activePage = () => {
+  form.classList.remove('ad-form--disabled');
+  mapFilters.classList.remove('map__filters--disabled');
+};
+
+deactivePage();
+// activePage();
 
 export {initValidation};
