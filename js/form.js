@@ -1,6 +1,10 @@
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const form = document.querySelector('.ad-form');
+const mapFilters = document.querySelector('.map__filters');
+const mapFiltersAll = mapFilters.querySelectorAll('.map__filter');
+const mapFieldsets = mapFilters.querySelectorAll('fieldset');
+const formFieldsets = form.querySelectorAll('fieldset');
 const inputAdvertTitle = form.querySelector('#title');
 inputAdvertTitle.addEventListener('input', () => {
   const valueLength = inputAdvertTitle.value.length;
@@ -68,4 +72,30 @@ const initValidation = () => {
   checkRoomsCapacity();
 };
 
-export {initValidation};
+const deactivatePage = () => {
+  form.classList.add('ad-form--disabled');
+  mapFilters.classList.add('map__filters--disabled');
+  mapFieldsets.forEach((fieldset) => {
+    fieldset.disabled = true;
+  });
+  mapFiltersAll.forEach((element) => element.disabled = true);
+  formFieldsets.forEach((fieldset) => {
+    fieldset.disabled = true;
+  });
+};
+
+const activatePage = () => {
+  form.classList.remove('ad-form--disabled');
+  mapFilters.classList.remove('map__filters--disabled');
+  mapFieldsets.forEach((fieldset) => {
+    fieldset.disabled = false;
+  });
+  mapFiltersAll.forEach((element) =>{
+    element.disabled = false;
+  });
+  formFieldsets.forEach((fieldset) => {
+    fieldset.disabled = false;
+  });
+};
+
+export {initValidation, deactivatePage, activatePage};
