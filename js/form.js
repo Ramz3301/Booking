@@ -72,7 +72,7 @@ const initValidation = () => {
   checkRoomsCapacity();
 };
 
-const deactivePage = () => {
+const deactivatePage = () => {
   form.classList.add('ad-form--disabled');
   mapFilters.classList.add('map__filters--disabled');
   mapFieldsets.forEach((fieldset) => {
@@ -84,7 +84,7 @@ const deactivePage = () => {
   });
 };
 
-const activePage = () => {
+const activatePage = () => {
   form.classList.remove('ad-form--disabled');
   mapFilters.classList.remove('map__filters--disabled');
   mapFieldsets.forEach((fieldset) => {
@@ -98,7 +98,4 @@ const activePage = () => {
   });
 };
 
-deactivePage();
-// activePage();
-
-export {initValidation, deactivePage, activePage};
+export {initValidation, deactivatePage, activatePage};
