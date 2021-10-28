@@ -99,6 +99,6 @@ const activePage = () => {
 };
 
 deactivePage();
-activePage();
+// activePage();
 
-export {initValidation};
+export {initValidation, deactivePage, activePage};
