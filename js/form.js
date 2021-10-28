@@ -86,10 +86,13 @@ const deactivePage = () => {
 
 const activePage = () => {
   form.classList.remove('ad-form--disabled');
-  mapFilters.classList.remove('map__filters--disabled');mapFieldsets.forEach((fieldset) => {
+  mapFilters.classList.remove('map__filters--disabled');
+  mapFieldsets.forEach((fieldset) => {
     fieldset.disabled = false;
   });
-  mapFiltersAll.forEach((element) => element.disabled = false);
+  mapFiltersAll.forEach((element) =>{
+    element.disabled = false;
+  });
   formFieldsets.forEach((fieldset) => {
     fieldset.disabled = false;
   });
