@@ -93,12 +93,6 @@ const changeMinPrice = () => {
   });
 };
 
-const initValidation = () => {
-  checkMaxPrice();
-  checkRoomsCapacity();
-  changeTimeSelect();
-  changeMinPrice();
-};
 
 const deactivatePage = () => {
   form.classList.add('ad-form--disabled');
@@ -126,4 +120,13 @@ const activatePage = () => {
   });
 };
 
-export {initValidation, deactivatePage, activatePage};
+const initValidation = () => {
+  checkMaxPrice();
+  checkRoomsCapacity();
+  changeTimeSelect();
+  changeMinPrice();
+  deactivatePage();
+  activatePage();
+};
+
+export {initValidation};
