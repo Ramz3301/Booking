@@ -67,9 +67,20 @@ const checkRoomsCapacity = () => {
   });
 };
 
+const changeTimeInput = () => {
+  const timeFieldset = document.querySelector('.ad-form__element--time');
+  const timeIn = timeFieldset.querySelector('#timein');
+  const timeOut = timeFieldset.querySelector('#timeout');
+  timeFieldset.addEventListener('change', (element) => {
+    timeIn.value = element.target.value;
+    timeOut.value = element.target.value;
+  });
+};
+
 const initValidation = () => {
   checkMaxPrice();
   checkRoomsCapacity();
+  changeTimeInput();
 };
 
 const deactivatePage = () => {
