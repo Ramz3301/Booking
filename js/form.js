@@ -6,6 +6,7 @@ const mapFiltersAll = mapFilters.querySelectorAll('.map__filter');
 const mapFieldsets = mapFilters.querySelectorAll('fieldset');
 const formFieldsets = form.querySelectorAll('fieldset');
 const inputAdvertTitle = form.querySelector('#title');
+const price = form.querySelector('#price');
 inputAdvertTitle.addEventListener('input', () => {
   const valueLength = inputAdvertTitle.value.length;
   if (valueLength < MIN_TITLE_LENGTH) {
@@ -19,7 +20,6 @@ inputAdvertTitle.addEventListener('input', () => {
 });
 
 const checkMaxPrice = () => {
-  const price = form.querySelector('#price');
   price.addEventListener('input', () => {
     if (price.value > 1000000) {
       price.setCustomValidity('Максимальное значение - 1000000');
@@ -67,10 +67,32 @@ const checkRoomsCapacity = () => {
   });
 };
 
-const initValidation = () => {
-  checkMaxPrice();
-  checkRoomsCapacity();
+const changeTimeSelect = () => {
+  const timeFieldset = document.querySelector('.ad-form__element--time');
+  const timeIn = timeFieldset.querySelector('#timein');
+  const timeOut = timeFieldset.querySelector('#timeout');
+  timeFieldset.addEventListener('change', (element) => {
+    timeIn.value = element.target.value;
+    timeOut.value = element.target.value;
+  });
 };
+
+const changeMinPrice = () => {
+  const MIN_PRICE = {
+    bungalow: 0,
+    flat: 1000,
+    hotel: 3000,
+    house: 5000,
+    palace: 10000,
+  };
+  const typeOfHousing = document.querySelector('#type');
+  typeOfHousing.addEventListener('change', () => {
+    const priceSelect = MIN_PRICE[typeOfHousing.value];
+    price.placeholder = priceSelect;
+    price.min = priceSelect;
+  });
+};
+
 
 const deactivatePage = () => {
   form.classList.add('ad-form--disabled');
@@ -98,4 +120,13 @@ const activatePage = () => {
   });
 };
 
-export {initValidation, deactivatePage, activatePage};
+const initValidation = () => {
+  checkMaxPrice();
+  checkRoomsCapacity();
+  changeTimeSelect();
+  changeMinPrice();
+  deactivatePage();
+  activatePage();
+};
+
+export {initValidation};
