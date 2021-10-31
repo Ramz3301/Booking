@@ -6,7 +6,7 @@ const downloadMap = () => {
       activatePage();
     })
     .setView({
-      lat:  35.6895000,
+      lat: 35.6895000,
       lng: 139.6917100,
     }, 10);
 
@@ -16,6 +16,37 @@ const downloadMap = () => {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   ).addTo(map);
+
+  // const marker = L.marker (
+  //   {
+  //     lat: 35.6895000,
+  //     lng: 139.6917100,
+  //   },
+  //   {
+  //     draggable: true,
+  //   },
+  // );
+
+  // marker.addTo(map);
+
+  const mainPinIcon = L.icon({
+    iconUrl: 'img/main-pin.svg',
+    iconSize: [52, 52],
+    iconAnchor: [26,52],
+  });
+
+  const mainPinMarker = L.marker (
+    {
+      lat: 35.6895000,
+      lng: 139.6917100,
+    },
+    {
+      draggable: true,
+      icon: mainPinIcon,
+    },
+  );
+  mainPinMarker.addTo(map);
 };
+
 
 export {downloadMap};
