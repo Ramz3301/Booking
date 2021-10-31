@@ -8,7 +8,7 @@ const downloadMap = () => {
     .setView({
       lat: 35.6895000,
       lng: 139.6917100,
-    }, 10);
+    }, 17);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -46,6 +46,10 @@ const downloadMap = () => {
     },
   );
   mainPinMarker.addTo(map);
+  mainPinMarker.on('moveend', (evt) => {
+    const locationAddress = document.querySelector('#address');
+    locationAddress.value = evt.target.getLatLng();
+  });
 };
 
 
