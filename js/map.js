@@ -37,8 +37,9 @@ const downloadMap = () => {
   );
   mainPinMarker.addTo(map);
   mainPinMarker.on('moveend', (evt) => {
-    const locationAddress = document.querySelector('#address');
-    locationAddress.value = evt.target.getLatLng();
+    const locationAddressInput = document.querySelector('#address');
+    const locationAddressCoordinates = Object.values(evt.target.getLatLng());
+    locationAddressInput.value = `${locationAddressCoordinates[0]}, ${locationAddressCoordinates[1]}`;
   });
 
   const adverts = getSimilarAdverts();
