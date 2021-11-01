@@ -1,5 +1,4 @@
 const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон
-const similarElement = document.querySelector('#map-canvas'); // Сюда будем вставлять шаблон
 const advertElement = similarAdvertsTemplate.cloneNode(true);
 
 const convertType = (offer) => {
@@ -54,7 +53,6 @@ const createSimilarAdvert = ({author, offer}) => {
   advertElement.querySelector('.popup__description').textContent = offer.description;
   createFeatures(advertElement, offer.features);
   createPhoto(advertElement, offer.photos);
-  similarElement.append(advertElement);
 };
 
 export {createSimilarAdvert};

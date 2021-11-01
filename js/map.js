@@ -1,5 +1,6 @@
 import { getSimilarAdverts } from './data.js';
 import { activatePage } from './form.js';
+import { createSimilarAdvert } from './popup.js';
 
 const downloadMap = () => {
   const map = L.map('map-canvas')
@@ -39,6 +40,7 @@ const downloadMap = () => {
     const locationAddress = document.querySelector('#address');
     locationAddress.value = evt.target.getLatLng();
   });
+
   const adverts = getSimilarAdverts();
   adverts.forEach((advert) => {
     const {lat, lng} = advert.location;
@@ -56,7 +58,9 @@ const downloadMap = () => {
         icon: icon,
       },
     );
-    marker.addTo(map);
+    marker
+      .addTo(map)
+      .bindPopup(createSimilarAdvert(advert)); // Не получается тут сделать правильно
   });
 };
 
