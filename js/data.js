@@ -55,6 +55,4 @@ const getSimilarAdverts = () => {
   return adverts;
 };
 
-// const getSimilarAdverts = () => Array.from({length: SIMILAR_ADS_COUNT}, (item, i) => createAdvert(i));
-
 export {getSimilarAdverts}
