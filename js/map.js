@@ -14,7 +14,7 @@ const downloadMap = () => {
   const iconAnchor = [20, 40];
   const advertisements = getSimilarAdverts();
   const locationAddressInput = document.querySelector('#address');
-  locationAddressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`
+  locationAddressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
   const map = L.map('map-canvas')
     .on('load', () => {
       activatePage();
@@ -48,7 +48,7 @@ const downloadMap = () => {
     },
   );
   mainPinMarker
-  .addTo(map); // Добавление главной метки на карту
+    .addTo(map);
   mainPinMarker.on('moveend', (evt) => {
     const locationAddressCoordinates = evt.target.getLatLng();
     locationAddressInput.value = `${locationAddressCoordinates.lat.toFixed(5)}, ${locationAddressCoordinates.lng.toFixed(5)}`;

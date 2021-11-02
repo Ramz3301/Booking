@@ -55,4 +55,4 @@ const getSimilarAdverts = () => {
   return adverts;
 };
 
-export {getSimilarAdverts}
+export {getSimilarAdverts};
