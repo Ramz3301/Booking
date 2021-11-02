@@ -126,7 +126,6 @@ const initValidation = () => {
   changeTimeSelect();
   changeMinPrice();
   deactivatePage();
-  activatePage();
 };
 
-export {initValidation};
+export {initValidation, activatePage};
