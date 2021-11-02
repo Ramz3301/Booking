@@ -3,6 +3,8 @@ import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
 
 const downloadMap = () => {
+  const LATITUDE = 35.6895000;
+  const LONGITUDE = 139.6917100;
   const map = L.map('map-canvas')
     .on('load', () => {
       activatePage();
@@ -10,7 +12,7 @@ const downloadMap = () => {
     .setView({
       lat: 35.6895000,
       lng: 139.6917100,
-    }, 17);
+    }, 13);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -39,7 +41,7 @@ const downloadMap = () => {
   mainPinMarker.on('moveend', (evt) => {
     const locationAddressInput = document.querySelector('#address');
     const locationAddressCoordinates = Object.values(evt.target.getLatLng());
-    locationAddressInput.value = `${locationAddressCoordinates[0]}, ${locationAddressCoordinates[1]}`;
+    locationAddressInput.value = `${locationAddressCoordinates[0].toFixed(5)}, ${locationAddressCoordinates[1].toFixed(5)}`;
   });
 
   const adverts = getSimilarAdverts();
