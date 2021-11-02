@@ -3,16 +3,26 @@ import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
 
 const downloadMap = () => {
-  const LATITUDE = 35.6895000;
-  const LONGITUDE = 139.6917100;
+  const lat = 35.6895000;
+  const lng = 139.6917100;
+  const SCALE = 13;
+  const mainIconUrl = 'img/main-pin.svg';
+  const mainIconSize = [52, 52];
+  const mainIconAnchor = [26, 52];
+  const iconUrl = 'img/pin.svg';
+  const iconSize = [40, 40];
+  const iconAnchor = [20, 40];
+  const advertisements = getSimilarAdverts();
+  const locationAddressInput = document.querySelector('#address');
+  locationAddressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`
   const map = L.map('map-canvas')
     .on('load', () => {
       activatePage();
     })
     .setView({
-      lat: 35.6895000,
-      lng: 139.6917100,
-    }, 13);
+      lat: lat,
+      lng: lng,
+    }, SCALE);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -22,35 +32,34 @@ const downloadMap = () => {
   ).addTo(map);
 
   const mainPinIcon = L.icon({
-    iconUrl: 'img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26,52],
+    iconUrl: mainIconUrl,
+    iconSize: mainIconSize,
+    iconAnchor: mainIconAnchor,
   });
 
   const mainPinMarker = L.marker (
     {
-      lat: 35.6895000,
-      lng: 139.6917100,
+      lat,
+      lng,
     },
     {
       draggable: true,
       icon: mainPinIcon,
     },
   );
-  mainPinMarker.addTo(map);
+  mainPinMarker
+  .addTo(map); // Добавление главной метки на карту
   mainPinMarker.on('moveend', (evt) => {
-    const locationAddressInput = document.querySelector('#address');
-    const locationAddressCoordinates = Object.values(evt.target.getLatLng());
-    locationAddressInput.value = `${locationAddressCoordinates[0].toFixed(5)}, ${locationAddressCoordinates[1].toFixed(5)}`;
+    const locationAddressCoordinates = evt.target.getLatLng();
+    locationAddressInput.value = `${locationAddressCoordinates.lat.toFixed(5)}, ${locationAddressCoordinates.lng.toFixed(5)}`;
   });
 
-  const adverts = getSimilarAdverts();
-  adverts.forEach((advert) => {
-    const {lat, lng} = advert.location;
+  advertisements.forEach((advertisement) => {
+    const {lat, lng} = advertisement.location;
     const icon = L.icon({
-      iconUrl: 'img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [20, 40],
+      iconUrl: iconUrl,
+      iconSize: iconSize,
+      iconAnchor: iconAnchor,
     });
     const marker = L.marker(
       {
@@ -63,7 +72,7 @@ const downloadMap = () => {
     );
     marker
       .addTo(map)
-      .bindPopup(createSimilarAdvert(advert)); // Не получается тут сделать правильно
+      .bindPopup(createSimilarAdvert(advertisement));
   });
 };
 
