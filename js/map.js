@@ -3,8 +3,8 @@ import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
 
 const downloadMap = () => {
-  const lat = 35.6895000;
-  const lng = 139.6917100;
+  const LATITUDE = 35.6895000;
+  const LONGITUDE = 139.6917100;
   const SCALE = 13;
   const mainIconUrl = 'img/main-pin.svg';
   const mainIconSize = [52, 52];
@@ -14,14 +14,14 @@ const downloadMap = () => {
   const iconAnchor = [20, 40];
   const advertisements = getSimilarAdverts();
   const locationAddressInput = document.querySelector('#address');
-  locationAddressInput.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   const map = L.map('map-canvas')
     .on('load', () => {
       activatePage();
     })
     .setView({
-      lat: lat,
-      lng: lng,
+      lat: LATITUDE,
+      lng: LONGITUDE,
     }, SCALE);
 
   L.tileLayer(
@@ -39,8 +39,8 @@ const downloadMap = () => {
 
   const mainPinMarker = L.marker (
     {
-      lat,
-      lng,
+      lat: LATITUDE,
+      lng: LONGITUDE,
     },
     {
       draggable: true,
