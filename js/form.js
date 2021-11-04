@@ -7,6 +7,8 @@ const mapFieldsets = mapFilters.querySelectorAll('fieldset');
 const formFieldsets = form.querySelectorAll('fieldset');
 const inputAdvertTitle = form.querySelector('#title');
 const price = form.querySelector('#price');
+const advertForm = document.querySelector('.ad-form');
+const resetButton = document.querySelector('.ad-form__reset');
 inputAdvertTitle.addEventListener('input', () => {
   const valueLength = inputAdvertTitle.value.length;
   if (valueLength < MIN_TITLE_LENGTH) {
@@ -120,6 +122,27 @@ const activatePage = () => {
   });
 };
 
+const clearForm = () => {
+  resetButton.addEventListener('click', () => {
+    advertForm.reset();
+    mapFilters.reset();
+  });
+};
+
+const setUserFormSubmit = (onSuccess) => {
+  advertForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const formData = new FormData(evt.target);
+    fetch(
+      'https://24.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
+  });
+};
+
 const initValidation = () => {
   checkMaxPrice();
   checkRoomsCapacity();
@@ -128,4 +151,4 @@ const initValidation = () => {
   deactivatePage();
 };
 
-export {initValidation, activatePage};
+export {initValidation, activatePage, setUserFormSubmit, clearForm};

@@ -1,8 +1,7 @@
-import { getSimilarAdverts } from './data.js';
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
 
-const downloadMap = () => {
+const downloadMap = (advertisements) => {
   const LATITUDE = 35.6895000;
   const LONGITUDE = 139.6917100;
   const SCALE = 13;
@@ -12,7 +11,6 @@ const downloadMap = () => {
   const iconUrl = 'img/pin.svg';
   const iconSize = [40, 40];
   const iconAnchor = [20, 40];
-  const advertisements = getSimilarAdverts();
   const locationAddressInput = document.querySelector('#address');
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   const map = L.map('map-canvas')

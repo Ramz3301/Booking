@@ -40,6 +40,7 @@ const createFeatures = (element, features) => {
     featuresContainer.append(featureItem);
   });
 };
+
 const createSimilarAdvert = ({author, offer}) => {
   const advertElement = similarAdvertsTemplate.cloneNode(true);
   advertElement.querySelector('.popup__avatar').src = author.avatar;
@@ -50,8 +51,8 @@ const createSimilarAdvert = ({author, offer}) => {
   advertElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   advertElement.querySelector('.popup__description').textContent = offer.description;
-  createFeatures(advertElement, offer.features);
-  createPhoto(advertElement, offer.photos);
+  // createFeatures(advertElement, offer.features);
+  // createPhoto(advertElement, offer.photos);
   return advertElement;
 };
 
