@@ -127,17 +127,6 @@ const activatePage = () => {
   });
 };
 
-// const clearForm = () => {
-//   resetButton.addEventListener('click', () => {
-//     advertForm.reset();
-//     mapFilters.reset();
-//     map.setView({
-//       lat: LATITUDE,
-//       lng: LONGITUDE,
-//     }, 13);
-//   });
-// };
-
 const setUserFormSubmit = (onSuccess) => {
   advertForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -154,7 +143,8 @@ const initValidation = () => {
   checkRoomsCapacity();
   changeTimeSelect();
   changeMinPrice();
-  // deactivatePage();
+  deactivatePage();
+  activatePage();
 };
 
 export {initValidation, activatePage, setUserFormSubmit};

@@ -1,4 +1,5 @@
 const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон объявления
+const success = document.querySelector('#success').content.querySelector('.success'); // Шаблон успешного добавления
 const error = document.querySelector('#error').content.querySelector('.error'); // Шаблон ошибки
 
 const convertType = (offer) => {
@@ -57,10 +58,14 @@ const createSimilarAdvert = ({author, offer}) => {
   return advertElement;
 };
 
-const createErrorMessage = () => {
-  const message = error.cloneNode(true);
-  message.querySelector('.error__message').textContent = 'Что-то пошло не так';
-  message.querySelector('.error__button').textContent = 'Попробовать снова';
+const createSuccessMessage = () => {
+  const successMessage = success.cloneNode(true);
+  document.body.append(successMessage);
 };
 
-export {createSimilarAdvert, createErrorMessage};
+const createErrorMessage = () => {
+  const errorMessage = error.cloneNode(true);
+  document.body.append(errorMessage);
+};
+
+export {createSimilarAdvert, createSuccessMessage, createErrorMessage};
