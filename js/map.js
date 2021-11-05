@@ -81,7 +81,8 @@ const advertForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 // const submitButton = document.querySelector('.ad-form__submit');
 const clearForm = () => {
-  resetButton.addEventListener('click', () => {
+  resetButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
     advertForm.reset();
     mapFilters.reset();
     map.closePopup();
