@@ -7,4 +7,4 @@ initValidation();
 getData((adverts) =>{
   downloadMap(adverts);
 });
-setUserFormSubmit(clearForm());
+setUserFormSubmit(clearForm()); // не понимаю, почему при успешной отправке не очищается форма
