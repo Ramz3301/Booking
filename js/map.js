@@ -79,7 +79,6 @@ const downloadMap = (advertisements) => {
 const resetButton = document.querySelector('.ad-form__reset');
 const advertForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
-// const submitButton = document.querySelector('.ad-form__submit');
 const clearForm = () => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
@@ -94,7 +93,7 @@ const clearForm = () => {
       lat: LATITUDE,
       lng: LONGITUDE,
     }, SCALE);
-    locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`; // Не получается
+    locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   });
 };
 export {downloadMap, clearForm};

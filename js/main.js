@@ -7,5 +7,4 @@ initValidation();
 getData((adverts) =>{
   downloadMap(adverts);
 });
-setUserFormSubmit(clearForm);
-clearForm();
+setUserFormSubmit(clearForm());

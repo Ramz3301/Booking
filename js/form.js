@@ -132,7 +132,7 @@ const setUserFormSubmit = (onSuccess) => {
     evt.preventDefault();
     sendData(
       () => onSuccess(),
-      () => showAlert(),
+      () => showAlert('ошибка'),
       new FormData(evt.target),
     );
   });
