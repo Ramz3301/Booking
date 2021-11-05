@@ -1,12 +1,10 @@
-import { clearForm, initValidation } from './form.js';
-import { downloadMap } from './map.js';
-import { setUserFormSubmit } from './form.js';
+import { initValidation, setUserFormSubmit } from './form.js';
+import { downloadMap,clearForm } from './map.js';
+import { getData } from './api.js';
 
 initValidation();
-fetch('https://24.javascript.pages.academy/keksobooking/data')
-  .then((response) => response.json())
-  .then((advertisements) => {
-    downloadMap(advertisements);
-  });
-setUserFormSubmit();
+getData((adverts) =>{
+  downloadMap(adverts);
+});
+setUserFormSubmit(clearForm);
 clearForm();

@@ -1,3 +1,6 @@
+import { sendData } from './api.js';
+import { showAlert } from './utils.js';
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const form = document.querySelector('.ad-form');
@@ -8,7 +11,9 @@ const formFieldsets = form.querySelectorAll('fieldset');
 const inputAdvertTitle = form.querySelector('#title');
 const price = form.querySelector('#price');
 const advertForm = document.querySelector('.ad-form');
-const resetButton = document.querySelector('.ad-form__reset');
+// const resetButton = document.querySelector('.ad-form__reset');
+// const LATITUDE = 35.6895000;
+// const LONGITUDE = 139.6917100;
 inputAdvertTitle.addEventListener('input', () => {
   const valueLength = inputAdvertTitle.value.length;
   if (valueLength < MIN_TITLE_LENGTH) {
@@ -87,6 +92,7 @@ const changeMinPrice = () => {
     house: 5000,
     palace: 10000,
   };
+
   const typeOfHousing = document.querySelector('#type');
   typeOfHousing.addEventListener('change', () => {
     const priceSelect = MIN_PRICE[typeOfHousing.value];
@@ -94,7 +100,6 @@ const changeMinPrice = () => {
     price.min = priceSelect;
   });
 };
-
 
 const deactivatePage = () => {
   form.classList.add('ad-form--disabled');
@@ -122,23 +127,24 @@ const activatePage = () => {
   });
 };
 
-const clearForm = () => {
-  resetButton.addEventListener('click', () => {
-    advertForm.reset();
-    mapFilters.reset();
-  });
-};
+// const clearForm = () => {
+//   resetButton.addEventListener('click', () => {
+//     advertForm.reset();
+//     mapFilters.reset();
+//     map.setView({
+//       lat: LATITUDE,
+//       lng: LONGITUDE,
+//     }, 13);
+//   });
+// };
 
 const setUserFormSubmit = (onSuccess) => {
   advertForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const formData = new FormData(evt.target);
-    fetch(
-      'https://24.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
+    sendData(
+      () => onSuccess(),
+      () => showAlert(),
+      new FormData(evt.target),
     );
   });
 };
@@ -148,7 +154,7 @@ const initValidation = () => {
   checkRoomsCapacity();
   changeTimeSelect();
   changeMinPrice();
-  deactivatePage();
+  // deactivatePage();
 };
 
-export {initValidation, activatePage, setUserFormSubmit, clearForm};
+export {initValidation, activatePage, setUserFormSubmit};
