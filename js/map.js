@@ -1,6 +1,9 @@
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
 
+const resetButton = document.querySelector('.ad-form__reset');
+const advertForm = document.querySelector('.ad-form');
+const mapFilters = document.querySelector('.map__filters');
 const LATITUDE = 35.6895000;
 const LONGITUDE = 139.6917100;
 const SCALE = 13;
@@ -13,7 +16,7 @@ const iconAnchor = [20, 40];
 const locationAddressInput = document.querySelector('#address');
 const map = L.map('map-canvas')
   .on('load', () => {
-    activatePage();
+    // activatePage(); //начал давать ошибку
   })
   .setView({
     lat: LATITUDE,
@@ -76,14 +79,18 @@ const downloadMap = (advertisements) => {
   });
 };
 
-const resetButton = document.querySelector('.ad-form__reset');
-const advertForm = document.querySelector('.ad-form');
-const mapFilters = document.querySelector('.map__filters');
 const clearForm = () => {
+  advertForm.reset();
+  mapFilters.reset();
+  locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
+};
+
+const resetFormButton = () => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
-    advertForm.reset();
-    mapFilters.reset();
+    // advertForm.reset();
+    // mapFilters.reset();
+    clearForm();
     map.closePopup();
     mainPinMarker.setLatLng({
       lat: LATITUDE,
@@ -93,7 +100,7 @@ const clearForm = () => {
       lat: LATITUDE,
       lng: LONGITUDE,
     }, SCALE);
-    locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   });
 };
-export {downloadMap, clearForm};
+
+export {downloadMap, clearForm, resetFormButton};

@@ -1,3 +1,4 @@
+const ALERT_SHOW_TIME = 5000;
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
@@ -75,7 +76,7 @@ function shuffle(elements) {
 function sample(elements) {
   return shuffle(elements).slice(getRandomPositiveInteger(0, elements.length - 1), elements.length);
 }
-const ALERT_SHOW_TIME = 5000;
+
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;

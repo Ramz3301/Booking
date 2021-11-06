@@ -1,5 +1,5 @@
 import { sendData } from './api.js';
-import { showAlert } from './utils.js';
+import { createErrorMessage } from './popup.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -10,10 +10,6 @@ const mapFieldsets = mapFilters.querySelectorAll('fieldset');
 const formFieldsets = form.querySelectorAll('fieldset');
 const inputAdvertTitle = form.querySelector('#title');
 const price = form.querySelector('#price');
-const advertForm = document.querySelector('.ad-form');
-// const resetButton = document.querySelector('.ad-form__reset');
-// const LATITUDE = 35.6895000;
-// const LONGITUDE = 139.6917100;
 inputAdvertTitle.addEventListener('input', () => {
   const valueLength = inputAdvertTitle.value.length;
   if (valueLength < MIN_TITLE_LENGTH) {
@@ -128,11 +124,11 @@ const activatePage = () => {
 };
 
 const setUserFormSubmit = (onSuccess) => {
-  advertForm.addEventListener('submit', (evt) => {
+  form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     sendData(
       () => onSuccess(),
-      () => showAlert('ошибка'),
+      () => createErrorMessage(),
       new FormData(evt.target),
     );
   });

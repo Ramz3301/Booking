@@ -1,3 +1,5 @@
+import { clearForm } from './map.js';
+
 const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон объявления
 const success = document.querySelector('#success').content.querySelector('.success'); // Шаблон успешного добавления
 const error = document.querySelector('#error').content.querySelector('.error'); // Шаблон ошибки
@@ -61,6 +63,7 @@ const createSimilarAdvert = ({author, offer}) => {
 const createSuccessMessage = () => {
   const successMessage = success.cloneNode(true);
   document.body.append(successMessage);
+  // clearForm();
 };
 
 const createErrorMessage = () => {
