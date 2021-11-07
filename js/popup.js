@@ -25,7 +25,7 @@ const createPhoto = (element, photos) => {
   const photoContainer = element.querySelector('.popup__photos');
   photoContainer.innerHTML = '';
   const photoItem = document.createElement('img');
-  photos.forEach((photoSource) => {
+  photos && photos.forEach((photoSource) => {
     photoItem.src = photoSource;
     photoItem.classList.add('popup__photo');
     photoItem.width = 45;
@@ -38,7 +38,7 @@ const createPhoto = (element, photos) => {
 const createFeatures = (element, features) => {
   const featuresContainer = element.querySelector('.popup__features');
   featuresContainer.innerHTML = '';
-  features.forEach((feature) => {
+  features && features.forEach((feature) => {
     const featureItem = document.createElement('li');
     featureItem.classList.add('popup__feature');
     featureItem.classList.add(`popup__feature--${feature}`);
@@ -56,8 +56,8 @@ const createSimilarAdvert = ({author, offer}) => {
   advertElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   advertElement.querySelector('.popup__description').textContent = offer.description;
-  // createFeatures(advertElement, offer.features); // не работает
-  // createPhoto(advertElement, offer.photos); // не работает
+  createFeatures(advertElement, offer.features); // не работает
+  createPhoto(advertElement, offer.photos); // не работает
   return advertElement;
 };
 
