@@ -7,7 +7,7 @@ import { showAlert } from './utils.js';
 const SIMILAR_ADVERTS_COUNT = 10;
 
 initValidation();
-getData((adverts, showAlert) =>{
+getData((adverts, showAlert) => { // передаю вторым колбэком, выдаёт ошибку
   downloadMap(adverts.slice(0, SIMILAR_ADVERTS_COUNT));
 });
 setUserFormSubmit(createSuccessMessage);

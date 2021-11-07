@@ -76,7 +76,6 @@ const createSuccessMessage = () => {
 const createErrorMessage = () => {
   const errorMessage = error.cloneNode(true);
   document.body.append(errorMessage);
-  clearForm();
   document.addEventListener ('keydown', (evt) => {
     if (isEscapeKey) {
       evt.preventDefault();

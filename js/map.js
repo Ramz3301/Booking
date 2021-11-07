@@ -85,13 +85,13 @@ const clearForm = () => {
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   map.closePopup();
   mainPinMarker.setLatLng({
-      lat: LATITUDE,
-      lng: LONGITUDE,
-    });
-    map.setView({
-      lat: LATITUDE,
-      lng: LONGITUDE,
-    }, SCALE);
+    lat: LATITUDE,
+    lng: LONGITUDE,
+  });
+  map.setView({
+    lat: LATITUDE,
+    lng: LONGITUDE,
+  }, SCALE);
 };
 
 const resetFormButton = () => {
