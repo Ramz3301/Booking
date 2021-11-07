@@ -1,4 +1,5 @@
 import { clearForm } from './map.js';
+import { isEscapeKey } from './utils.js';
 
 const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон объявления
 const success = document.querySelector('#success').content.querySelector('.success'); // Шаблон успешного добавления
@@ -64,12 +65,24 @@ const createSuccessMessage = () => {
   const successMessage = success.cloneNode(true);
   document.body.append(successMessage);
   clearForm();
+  document.addEventListener ('keydown', (evt) => {
+    if (isEscapeKey) {
+      evt.preventDefault();
+      successMessage.remove();
+    }
+  });
 };
 
 const createErrorMessage = () => {
   const errorMessage = error.cloneNode(true);
   document.body.append(errorMessage);
   clearForm();
+  document.addEventListener ('keydown', (evt) => {
+    if (isEscapeKey) {
+      evt.preventDefault();
+      errorMessage.remove();
+    }
+  });
 };
 
 export {createSimilarAdvert, createSuccessMessage, createErrorMessage};
