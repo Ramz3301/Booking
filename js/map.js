@@ -16,7 +16,7 @@ const iconAnchor = [20, 40];
 const locationAddressInput = document.querySelector('#address');
 const map = L.map('map-canvas')
   .on('load', () => {
-    // activatePage(); //начал давать ошибку
+    // activatePage(); // начал давать ошибку
   })
   .setView({
     lat: LATITUDE,
@@ -83,15 +83,13 @@ const clearForm = () => {
   advertForm.reset();
   mapFilters.reset();
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
+  map.closePopup();
 };
 
 const resetFormButton = () => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
-    // advertForm.reset();
-    // mapFilters.reset();
     clearForm();
-    map.closePopup();
     mainPinMarker.setLatLng({
       lat: LATITUDE,
       lng: LONGITUDE,

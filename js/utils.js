@@ -96,4 +96,13 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRandomPositiveInteger, getRandomPositiveFloat, sample, showAlert};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+function closeUserModal () {
+  userModalElement.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscKeydown);
+};
+
+export {getRandomPositiveInteger, getRandomPositiveFloat, sample, showAlert, isEscapeKey, isEnterKey};

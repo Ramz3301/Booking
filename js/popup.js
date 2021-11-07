@@ -63,12 +63,13 @@ const createSimilarAdvert = ({author, offer}) => {
 const createSuccessMessage = () => {
   const successMessage = success.cloneNode(true);
   document.body.append(successMessage);
-  // clearForm();
+  clearForm();
 };
 
 const createErrorMessage = () => {
   const errorMessage = error.cloneNode(true);
   document.body.append(errorMessage);
+  clearForm();
 };
 
 export {createSimilarAdvert, createSuccessMessage, createErrorMessage};
