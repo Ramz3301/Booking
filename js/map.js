@@ -84,13 +84,7 @@ const clearForm = () => {
   mapFilters.reset();
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   map.closePopup();
-};
-
-const resetFormButton = () => {
-  resetButton.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    clearForm();
-    mainPinMarker.setLatLng({
+  mainPinMarker.setLatLng({
       lat: LATITUDE,
       lng: LONGITUDE,
     });
@@ -98,6 +92,20 @@ const resetFormButton = () => {
       lat: LATITUDE,
       lng: LONGITUDE,
     }, SCALE);
+};
+
+const resetFormButton = () => {
+  resetButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    clearForm();
+    // mainPinMarker.setLatLng({
+    //   lat: LATITUDE,
+    //   lng: LONGITUDE,
+    // });
+    // map.setView({
+    //   lat: LATITUDE,
+    //   lng: LONGITUDE,
+    // }, SCALE);
   });
 };
 
