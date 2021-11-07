@@ -1,6 +1,5 @@
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
-
 const resetButton = document.querySelector('.ad-form__reset');
 const advertForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -14,14 +13,7 @@ const iconUrl = 'img/pin.svg';
 const iconSize = [40, 40];
 const iconAnchor = [20, 40];
 const locationAddressInput = document.querySelector('#address');
-const map = L.map('map-canvas')
-  .on('load', () => {
-    // activatePage(); // начал давать ошибку
-  })
-  .setView({
-    lat: LATITUDE,
-    lng: LONGITUDE,
-  }, SCALE);
+const map = L.map('map-canvas');
 
 const mainPinIcon = L.icon({
   iconUrl: mainIconUrl,
@@ -47,7 +39,14 @@ L.tileLayer(
   },
 ).addTo(map);
 const downloadMap = (advertisements) => {
-  locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
+  // locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
+  map.on('load', () => {
+    activatePage();
+  })
+    .setView({
+      lat: LATITUDE,
+      lng: LONGITUDE,
+    }, SCALE);
 
 
   mainPinMarker

@@ -140,7 +140,6 @@ const initValidation = () => {
   changeTimeSelect();
   changeMinPrice();
   deactivatePage();
-  activatePage();
 };
 
 export {initValidation, activatePage, setUserFormSubmit};
