@@ -55,8 +55,8 @@ const createSimilarAdvert = ({author, offer}) => {
   advertElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`;
   advertElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`;
   advertElement.querySelector('.popup__description').textContent = offer.description;
-  // createFeatures(advertElement, offer.features);
-  // createPhoto(advertElement, offer.photos);
+  // createFeatures(advertElement, offer.features); // не работает
+  // createPhoto(advertElement, offer.photos); // не работает
   return advertElement;
 };
 

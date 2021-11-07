@@ -98,14 +98,6 @@ const resetFormButton = () => {
   resetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     clearForm();
-    // mainPinMarker.setLatLng({
-    //   lat: LATITUDE,
-    //   lng: LONGITUDE,
-    // });
-    // map.setView({
-    //   lat: LATITUDE,
-    //   lng: LONGITUDE,
-    // }, SCALE);
   });
 };
 
