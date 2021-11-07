@@ -10,7 +10,7 @@ const getData = (onSuccess, onError) => {
       onSuccess(advertisements);
     })
     .catch(() => {
-      onError();
+      onError('Не удалось получить данные. Попробуйте ещё раз');
     });
 };
 
