@@ -39,7 +39,7 @@ L.tileLayer(
   },
 ).addTo(map);
 const downloadMap = (advertisements) => {
-  // locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
+  locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   map.on('load', () => {
     activatePage();
   })

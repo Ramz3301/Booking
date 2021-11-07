@@ -66,7 +66,7 @@ const createSuccessMessage = () => {
   document.body.append(successMessage);
   clearForm();
   document.addEventListener ('keydown', (evt) => {
-    if (isEscapeKey) {
+    if (isEscapeKey(evt)) {
       evt.preventDefault();
       successMessage.remove();
     }
@@ -77,7 +77,7 @@ const createErrorMessage = () => {
   const errorMessage = error.cloneNode(true);
   document.body.append(errorMessage);
   document.addEventListener ('keydown', (evt) => {
-    if (isEscapeKey) {
+    if (isEscapeKey(evt)) {
       evt.preventDefault();
       errorMessage.remove();
     }
