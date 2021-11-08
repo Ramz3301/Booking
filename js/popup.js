@@ -71,6 +71,9 @@ const createSuccessMessage = () => {
       successMessage.remove();
     }
   }, {once: true});
+  document.addEventListener ('click', () => {
+    successMessage.remove();
+  }, {once: true});
 };
 
 const createErrorMessage = () => {
@@ -81,6 +84,9 @@ const createErrorMessage = () => {
       evt.preventDefault();
       errorMessage.remove();
     }
+  }, {once: true});
+  document.addEventListener ('click', () => {
+    errorMessage.remove();
   }, {once: true});
 };
 
