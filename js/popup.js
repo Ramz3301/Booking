@@ -70,7 +70,7 @@ const createSuccessMessage = () => {
       evt.preventDefault();
       successMessage.remove();
     }
-  });
+  }, {once: true});
 };
 
 const createErrorMessage = () => {
@@ -81,7 +81,7 @@ const createErrorMessage = () => {
       evt.preventDefault();
       errorMessage.remove();
     }
-  });
+  }, {once: true});
 };
 
 export {createSimilarAdvert, createSuccessMessage, createErrorMessage};
