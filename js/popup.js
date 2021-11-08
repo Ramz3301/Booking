@@ -4,6 +4,8 @@ import { isEscapeKey } from './utils.js';
 const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон объявления
 const success = document.querySelector('#success').content.querySelector('.success'); // Шаблон успешного добавления
 const error = document.querySelector('#error').content.querySelector('.error'); // Шаблон ошибки
+// const successMessage = success.cloneNode(true);
+let message;
 
 const convertType = (offer) => {
   switch (offer.type) {
@@ -61,33 +63,33 @@ const createSimilarAdvert = ({author, offer}) => {
   return advertElement;
 };
 
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    message.remove();
+    removeEventListener('keydown', onDocumentKeydown);
+  }
+};
+
 const createSuccessMessage = () => {
-  const successMessage = success.cloneNode(true);
-  document.body.append(successMessage);
+  message = success.cloneNode(true);
+  message.addEventListener ('click', () => {
+    message.remove();
+    document.removeEventListener('keydown', onDocumentKeydown);
+  });
+  document.addEventListener('keydown', onDocumentKeydown);
+  document.body.append(message);
   clearForm();
-  document.addEventListener ('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      successMessage.remove();
-    }
-  }, {once: true});
-  document.addEventListener ('click', () => {
-    successMessage.remove();
-  }, {once: true});
 };
 
 const createErrorMessage = () => {
-  const errorMessage = error.cloneNode(true);
-  document.body.append(errorMessage);
-  document.addEventListener ('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      errorMessage.remove();
-    }
-  }, {once: true});
+  message = error.cloneNode(true);
   document.addEventListener ('click', () => {
-    errorMessage.remove();
-  }, {once: true});
+    message.remove();
+    document.addEventListener('keydown', onDocumentKeydown);
+  });
+  document.addEventListener ('keydown', onDocumentKeydown);
+  document.body.append(message);
 };
 
 export {createSimilarAdvert, createSuccessMessage, createErrorMessage};
