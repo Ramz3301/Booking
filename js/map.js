@@ -14,7 +14,7 @@ const iconSize = [40, 40];
 const iconAnchor = [20, 40];
 const locationAddressInput = document.querySelector('#address');
 const map = L.map('map-canvas');
-
+const SIMILAR_ADVERTS_COUNT = 10;
 const mainPinIcon = L.icon({
   iconUrl: mainIconUrl,
   iconSize: mainIconSize,
@@ -55,8 +55,7 @@ const downloadMap = (advertisements) => {
     const locationAddressCoordinates = evt.target.getLatLng();
     locationAddressInput.value = `${locationAddressCoordinates.lat.toFixed(5)}, ${locationAddressCoordinates.lng.toFixed(5)}`;
   });
-
-  advertisements.forEach((advertisement) => {
+  advertisements.slice(0, SIMILAR_ADVERTS_COUNT).forEach((advertisement) => {
     const {lat, lng} = advertisement.location;
     const icon = L.icon({
       iconUrl: iconUrl,
