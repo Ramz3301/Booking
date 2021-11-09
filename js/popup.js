@@ -1,4 +1,11 @@
-const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон
+import { clearForm } from './map.js';
+import { isEscapeKey } from './utils.js';
+
+const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон объявления
+const success = document.querySelector('#success').content.querySelector('.success'); // Шаблон успешного добавления
+const error = document.querySelector('#error').content.querySelector('.error'); // Шаблон ошибки
+// const successMessage = success.cloneNode(true);
+let message;
 
 const convertType = (offer) => {
   switch (offer.type) {
@@ -20,7 +27,7 @@ const createPhoto = (element, photos) => {
   const photoContainer = element.querySelector('.popup__photos');
   photoContainer.innerHTML = '';
   const photoItem = document.createElement('img');
-  photos.forEach((photoSource) => {
+  photos && photos.forEach((photoSource) => {
     photoItem.src = photoSource;
     photoItem.classList.add('popup__photo');
     photoItem.width = 45;
@@ -33,13 +40,14 @@ const createPhoto = (element, photos) => {
 const createFeatures = (element, features) => {
   const featuresContainer = element.querySelector('.popup__features');
   featuresContainer.innerHTML = '';
-  features.forEach((feature) => {
+  features && features.forEach((feature) => {
     const featureItem = document.createElement('li');
     featureItem.classList.add('popup__feature');
     featureItem.classList.add(`popup__feature--${feature}`);
     featuresContainer.append(featureItem);
   });
 };
+
 const createSimilarAdvert = ({author, offer}) => {
   const advertElement = similarAdvertsTemplate.cloneNode(true);
   advertElement.querySelector('.popup__avatar').src = author.avatar;
@@ -55,4 +63,33 @@ const createSimilarAdvert = ({author, offer}) => {
   return advertElement;
 };
 
-export {createSimilarAdvert};
+const onDocumentKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    message.remove();
+    removeEventListener('keydown', onDocumentKeydown);
+  }
+};
+
+const createSuccessMessage = () => {
+  message = success.cloneNode(true);
+  message.addEventListener ('click', () => {
+    message.remove();
+    document.removeEventListener('keydown', onDocumentKeydown);
+  });
+  document.addEventListener('keydown', onDocumentKeydown);
+  document.body.append(message);
+  clearForm();
+};
+
+const createErrorMessage = () => {
+  message = error.cloneNode(true);
+  document.addEventListener ('click', () => {
+    message.remove();
+    document.addEventListener('keydown', onDocumentKeydown);
+  });
+  document.addEventListener ('keydown', onDocumentKeydown);
+  document.body.append(message);
+};
+
+export {createSimilarAdvert, createSuccessMessage, createErrorMessage};

@@ -1,3 +1,6 @@
+import { sendData } from './api.js';
+import { createErrorMessage } from './popup.js';
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const form = document.querySelector('.ad-form');
@@ -85,6 +88,7 @@ const changeMinPrice = () => {
     house: 5000,
     palace: 10000,
   };
+
   const typeOfHousing = document.querySelector('#type');
   typeOfHousing.addEventListener('change', () => {
     const priceSelect = MIN_PRICE[typeOfHousing.value];
@@ -92,7 +96,6 @@ const changeMinPrice = () => {
     price.min = priceSelect;
   });
 };
-
 
 const deactivatePage = () => {
   form.classList.add('ad-form--disabled');
@@ -120,6 +123,17 @@ const activatePage = () => {
   });
 };
 
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    sendData(
+      () => onSuccess(),
+      () => createErrorMessage(),
+      new FormData(evt.target),
+    );
+  });
+};
+
 const initValidation = () => {
   checkMaxPrice();
   checkRoomsCapacity();
@@ -128,4 +142,4 @@ const initValidation = () => {
   deactivatePage();
 };
 
-export {initValidation, activatePage};
+export {initValidation, activatePage, setUserFormSubmit};

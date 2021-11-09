@@ -1,52 +1,54 @@
-import { getSimilarAdverts } from './data.js';
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
+const resetButton = document.querySelector('.ad-form__reset');
+const advertForm = document.querySelector('.ad-form');
+const mapFilters = document.querySelector('.map__filters');
+const LATITUDE = 35.6895000;
+const LONGITUDE = 139.6917100;
+const SCALE = 13;
+const mainIconUrl = 'img/main-pin.svg';
+const mainIconSize = [52, 52];
+const mainIconAnchor = [26, 52];
+const iconUrl = 'img/pin.svg';
+const iconSize = [40, 40];
+const iconAnchor = [20, 40];
+const locationAddressInput = document.querySelector('#address');
+const map = L.map('map-canvas');
 
-const downloadMap = () => {
-  const LATITUDE = 35.6895000;
-  const LONGITUDE = 139.6917100;
-  const SCALE = 13;
-  const mainIconUrl = 'img/main-pin.svg';
-  const mainIconSize = [52, 52];
-  const mainIconAnchor = [26, 52];
-  const iconUrl = 'img/pin.svg';
-  const iconSize = [40, 40];
-  const iconAnchor = [20, 40];
-  const advertisements = getSimilarAdverts();
-  const locationAddressInput = document.querySelector('#address');
+const mainPinIcon = L.icon({
+  iconUrl: mainIconUrl,
+  iconSize: mainIconSize,
+  iconAnchor: mainIconAnchor,
+});
+
+const mainPinMarker = L.marker (
+  {
+    lat: LATITUDE,
+    lng: LONGITUDE,
+  },
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
+);
+
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+).addTo(map);
+const downloadMap = (advertisements) => {
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
-  const map = L.map('map-canvas')
-    .on('load', () => {
-      activatePage();
-    })
+  map.on('load', () => {
+    activatePage();
+  })
     .setView({
       lat: LATITUDE,
       lng: LONGITUDE,
     }, SCALE);
 
-  L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    },
-  ).addTo(map);
 
-  const mainPinIcon = L.icon({
-    iconUrl: mainIconUrl,
-    iconSize: mainIconSize,
-    iconAnchor: mainIconAnchor,
-  });
-
-  const mainPinMarker = L.marker (
-    {
-      lat: LATITUDE,
-      lng: LONGITUDE,
-    },
-    {
-      draggable: true,
-      icon: mainPinIcon,
-    },
-  );
   mainPinMarker
     .addTo(map);
   mainPinMarker.on('moveend', (evt) => {
@@ -76,5 +78,26 @@ const downloadMap = () => {
   });
 };
 
+const clearForm = () => {
+  advertForm.reset();
+  mapFilters.reset();
+  locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
+  map.closePopup();
+  mainPinMarker.setLatLng({
+    lat: LATITUDE,
+    lng: LONGITUDE,
+  });
+  map.setView({
+    lat: LATITUDE,
+    lng: LONGITUDE,
+  }, SCALE);
+};
 
-export {downloadMap};
+const resetFormButton = () => {
+  resetButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    clearForm();
+  });
+};
+
+export {downloadMap, clearForm, resetFormButton};
