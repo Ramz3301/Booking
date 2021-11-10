@@ -1,9 +1,26 @@
-import { mapFilters } from './map.js';
+import { mapFilters, deleteMarkers } from './map.js';
 // import { debounce } from './utils/debounce.js';
 
-
 const DEFAULT_VALUE = 'any';
-const housingType = mapFilters.querySelector('#housing-type').value;
+const housingTypeSelect = mapFilters.querySelector('#housing-type');
 
-const chooseHousingType = (advert) => housingType === advert.offer.type || housingType === DEFAULT_VALUE;
+const chooseHousingType = (advert) => {
+  if(housingTypeSelect.value === advert.offer.type || housingTypeSelect.value === DEFAULT_VALUE) {
+    return true;
+  }
+  return false;
+};
 
+const filterData = (array) => {
+  const arrayAfterFilter = array.filter(chooseHousingType);
+};
+
+const addFilterData = (cb) => {
+  housingTypeSelect.addEventListener('change', () => {
+    cb();
+  });
+};
+
+addFilterData(filterData);
+
+export {addFilterData};

@@ -1,6 +1,6 @@
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
-import { comparesAdvertsOffers } from './filter.js';
+import { addFilterData, filterData } from './filter.js';
 
 
 const resetButton = document.querySelector('.ad-form__reset');
@@ -35,14 +35,14 @@ const mainPinMarker = L.marker (
   },
 );
 
-const markerGroup = L.layerGroup().addTo(map);
-
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
+
+const markerGroup = L.layerGroup().addTo(map);
 
 const downloadMap = (advertisements) => {
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
@@ -61,7 +61,8 @@ const downloadMap = (advertisements) => {
     const locationAddressCoordinates = evt.target.getLatLng();
     locationAddressInput.value = `${locationAddressCoordinates.lat.toFixed(5)}, ${locationAddressCoordinates.lng.toFixed(5)}`;
   });
-  advertisements.filter(comparesAdvertsOffers)
+
+  advertisements
     .slice(0, SIMILAR_ADVERTS_COUNT)
     .forEach((advertisement) => {
       const {lat, lng} = advertisement.location;
@@ -107,4 +108,4 @@ const resetFormButton = () => {
   });
 };
 
-export {downloadMap, clearForm, resetFormButton, mapFilters};
+export {downloadMap, clearForm, resetFormButton, mapFilters, deleteMarkers};
