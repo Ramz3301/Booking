@@ -1,7 +1,7 @@
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
 
-
+const SIMILAR_ADVERTS_COUNT = 10;
 const resetButton = document.querySelector('.ad-form__reset');
 const advertForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -16,7 +16,6 @@ const iconSize = [40, 40];
 const iconAnchor = [20, 40];
 const locationAddressInput = document.querySelector('#address');
 const map = L.map('map-canvas');
-const SIMILAR_ADVERTS_COUNT = 10;
 const mainPinIcon = L.icon({
   iconUrl: mainIconUrl,
   iconSize: mainIconSize,
