@@ -4,7 +4,6 @@ import { isEscapeKey } from './utils.js';
 const similarAdvertsTemplate = document.querySelector('#card').content.querySelector('.popup'); // Шаблон объявления
 const success = document.querySelector('#success').content.querySelector('.success'); // Шаблон успешного добавления
 const error = document.querySelector('#error').content.querySelector('.error'); // Шаблон ошибки
-// const successMessage = success.cloneNode(true);
 let message;
 
 const convertType = (offer) => {
