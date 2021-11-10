@@ -59,7 +59,6 @@ const downloadMap = (advertisements) => {
     const locationAddressCoordinates = evt.target.getLatLng();
     locationAddressInput.value = `${locationAddressCoordinates.lat.toFixed(5)}, ${locationAddressCoordinates.lng.toFixed(5)}`;
   });
-
   advertisements
     .slice(0, SIMILAR_ADVERTS_COUNT)
     .forEach((advertisement) => {
