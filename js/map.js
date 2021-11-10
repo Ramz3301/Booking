@@ -62,7 +62,7 @@ const downloadMap = (advertisements) => {
   });
 
   advertisements
-    .slice(0, SIMILAR_ADVERTS_COUNT)
+    // .slice(0, SIMILAR_ADVERTS_COUNT)
     .forEach((advertisement) => {
       const {lat, lng} = advertisement.location;
       const icon = L.icon({

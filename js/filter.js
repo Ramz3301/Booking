@@ -4,13 +4,13 @@ import { downloadMap, mapFilters} from './map.js';
 const DEFAULT_VALUE = 'any';
 const housingTypeSelect = mapFilters.querySelector('#housing-type');
 
-const filterOffers = (ads) => {
+const filterOffers = (adverts) => {
   housingTypeSelect.addEventListener('change', () => {
     if (housingTypeSelect.value === DEFAULT_VALUE) {
-      downloadMap(ads);
+      downloadMap(adverts);
     } else {
-      const filteredAds = ads.filter((ad) => ad.offer.type === housingTypeSelect.value);
-      downloadMap(filteredAds);
+      const filterAdverts = adverts.filter((ad) => ad.offer.type === housingTypeSelect.value);
+      downloadMap(filterAdverts);
     }
   });
 };
