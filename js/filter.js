@@ -9,7 +9,7 @@ const filterOffers = (adverts) => {
     if (housingTypeSelect.value === DEFAULT_VALUE) {
       downloadMap(adverts);
     } else {
-      const filterAdverts = adverts.filter((ad) => ad.offer.type === housingTypeSelect.value);
+      const filterAdverts = adverts.filter((object) => object.offer.type === housingTypeSelect.value);
       downloadMap(filterAdverts);
     }
   });
