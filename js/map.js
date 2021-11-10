@@ -1,6 +1,6 @@
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
-import { addFilterData, filterData } from './filter.js';
+// import { addFilterData } from './filter.js';
 
 
 const resetButton = document.querySelector('.ad-form__reset');
