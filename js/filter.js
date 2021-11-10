@@ -1,26 +1,18 @@
-import { mapFilters} from './map.js';
+import { downloadMap, mapFilters} from './map.js';
 // import { debounce } from './utils/debounce.js';
 
 const DEFAULT_VALUE = 'any';
 const housingTypeSelect = mapFilters.querySelector('#housing-type');
 
-const chooseHousingType = (advert) => {
-  if(housingTypeSelect.value === advert.offer.type || housingTypeSelect.value === DEFAULT_VALUE) {
-    return true;
-  }
-  return false;
-};
-
-const filterData = (array) => {
-  const arrayAfterFilter = array.filter(chooseHousingType);
-};
-
-const addFilterData = (cb) => {
+const filterOffers = (ads) => {
   housingTypeSelect.addEventListener('change', () => {
-    cb();
+    if (housingTypeSelect.value === DEFAULT_VALUE) {
+      downloadMap(ads);
+    } else {
+      const filteredAds = ads.filter((ad) => ad.offer.type === housingTypeSelect.value);
+      downloadMap(filteredAds);
+    }
   });
 };
 
-addFilterData(filterData);
-
-export {addFilterData};
+export {filterOffers};
