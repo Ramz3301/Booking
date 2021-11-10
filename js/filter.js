@@ -1,4 +1,4 @@
-import { mapFilters, deleteMarkers } from './map.js';
+import { mapFilters} from './map.js';
 // import { debounce } from './utils/debounce.js';
 
 const DEFAULT_VALUE = 'any';

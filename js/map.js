@@ -108,4 +108,4 @@ const resetFormButton = () => {
   });
 };
 
-export {downloadMap, clearForm, resetFormButton, mapFilters, deleteMarkers};
+export {downloadMap, clearForm, resetFormButton, mapFilters};
