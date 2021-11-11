@@ -1,20 +1,22 @@
 import { downloadMap } from './map.js';
-// import { debounce } from './utils/debounce.js';
+import { debounce } from './utils/debounce.js';
 
 const DEFAULT_VALUE = 'any';
-const housingTypeSelect = document.querySelector('#housing-type');
-// const priceSelect = document.querySelector('#housing-price');
-// const guestsSelect = document.querySelector('#housing-guests');
+const mapFilters = document.querySelector('.map__filters');
+const housingTypeSelect = mapFilters.querySelector('#housing-type');
 
-const filterAdverts = (adverts) => {
-  housingTypeSelect.addEventListener('change', () => {
-    if (housingTypeSelect.value === DEFAULT_VALUE) {
-      downloadMap(adverts);
-    } else {
-      const filterAdvertisements = adverts.filter((object) => object.offer.type === housingTypeSelect.value);
-      downloadMap(filterAdvertisements);
-    }
-  });
+
+const selectedType = (advert) => housingTypeSelect.value === advert.offer.type || housingTypeSelect.value  === DEFAULT_VALUE;
+
+const filterAdverts = (adverts) => adverts.filter((advert) => selectedType(advert));
+
+const createFilteredAdverts = (adverts) => {
+  const filteredAdverts = filterAdverts(adverts);
+  downloadMap(filteredAdverts);
 };
 
-export {filterAdverts};
+const setFilterListener = (adverts) => {
+  mapFilters.addEventListener('change', debounce(() => createFilteredAdverts(adverts)));
+};
+
+export {setFilterListener};
