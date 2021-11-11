@@ -6,6 +6,7 @@ const mapFilters = document.querySelector('.map__filters');
 const housingTypeSelect = mapFilters.querySelector('#housing-type');
 const roomsSelect = mapFilters.querySelector('#housing-rooms');
 const guestsSelect = mapFilters.querySelector('#housing-guests');
+const featuresFieldset = mapFilters.querySelector('#housing-features');
 const priceSelect = mapFilters.querySelector('#housing-price');
 const price = {
   low: {
@@ -43,8 +44,19 @@ const selectedPrice = (point) => {
       return false;
   }
 };
+const selectedFeatures = (advert) => {
+  const checkedFeatures = featuresFieldset.querySelectorAll('[name="features"]:checked');
+  const featuresArray = [];
 
-const filterAdverts = (adverts) => adverts.filter((advert) => selectedType(advert) && selectedRooms(advert) && selectedGuests(advert) && selectedPrice(advert));
+  if (advert.offer.features) {
+    checkedFeatures.forEach((element) => {
+      featuresArray.push(element.value);
+    });
+    return featuresArray.every((element) => advert.offer.features.includes(element));
+  }
+};
+
+const filterAdverts = (adverts) => adverts.filter((advert) => selectedType(advert) && selectedRooms(advert) && selectedGuests(advert) && selectedPrice(advert) && selectedFeatures(advert));
 
 const createFilteredAdverts = (adverts) => {
   const filteredAdverts = filterAdverts(adverts);
