@@ -1,5 +1,7 @@
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
+
+const SIMILAR_ADVERTS_COUNT = 10;
 const resetButton = document.querySelector('.ad-form__reset');
 const advertForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
@@ -14,7 +16,6 @@ const iconSize = [40, 40];
 const iconAnchor = [20, 40];
 const locationAddressInput = document.querySelector('#address');
 const map = L.map('map-canvas');
-
 const mainPinIcon = L.icon({
   iconUrl: mainIconUrl,
   iconSize: mainIconSize,
@@ -38,8 +39,12 @@ L.tileLayer(
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
+
+const markerGroup = L.layerGroup().addTo(map);
+
 const downloadMap = (advertisements) => {
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
+  markerGroup.clearLayers();
   map.on('load', () => {
     activatePage();
   })
@@ -48,34 +53,34 @@ const downloadMap = (advertisements) => {
       lng: LONGITUDE,
     }, SCALE);
 
-
   mainPinMarker
     .addTo(map);
   mainPinMarker.on('moveend', (evt) => {
     const locationAddressCoordinates = evt.target.getLatLng();
     locationAddressInput.value = `${locationAddressCoordinates.lat.toFixed(5)}, ${locationAddressCoordinates.lng.toFixed(5)}`;
   });
-
-  advertisements.forEach((advertisement) => {
-    const {lat, lng} = advertisement.location;
-    const icon = L.icon({
-      iconUrl: iconUrl,
-      iconSize: iconSize,
-      iconAnchor: iconAnchor,
+  advertisements
+    .slice(0, SIMILAR_ADVERTS_COUNT)
+    .forEach((advertisement) => {
+      const {lat, lng} = advertisement.location;
+      const icon = L.icon({
+        iconUrl: iconUrl,
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+      });
+      const marker = L.marker(
+        {
+          lat,
+          lng,
+        },
+        {
+          icon: icon,
+        },
+      );
+      marker
+        .addTo(markerGroup)
+        .bindPopup(createSimilarAdvert(advertisement));
     });
-    const marker = L.marker(
-      {
-        lat,
-        lng,
-      },
-      {
-        icon: icon,
-      },
-    );
-    marker
-      .addTo(map)
-      .bindPopup(createSimilarAdvert(advertisement));
-  });
 };
 
 const clearForm = () => {
@@ -100,4 +105,5 @@ const resetFormButton = () => {
   });
 };
 
-export {downloadMap, clearForm, resetFormButton};
+export {downloadMap, clearForm, resetFormButton, mapFilters};
+
