@@ -1,4 +1,4 @@
-import { activatePage } from './form.js';
+import { activatePage, price } from './form.js';
 import { createSimilarAdvert } from './popup.js';
 import { data } from './data.js';
 
@@ -89,6 +89,7 @@ const clearForm = () => {
   mapFilters.reset();
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   map.closePopup();
+  price.placeholder = 5000;
   downloadMap(data.adverts);
   mainPinMarker.setLatLng({
     lat: LATITUDE,

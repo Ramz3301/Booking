@@ -18,6 +18,7 @@ const mapFieldsets = mapFilters.querySelectorAll('fieldset');
 const formFieldsets = form.querySelectorAll('fieldset');
 const inputAdvertTitle = form.querySelector('#title');
 const price = form.querySelector('#price');
+const typeOfHousing = document.querySelector('#type');
 
 
 inputAdvertTitle.addEventListener('input', () => {
@@ -32,11 +33,13 @@ inputAdvertTitle.addEventListener('input', () => {
   inputAdvertTitle.reportValidity();
 });
 
-
-const checkMaxPrice = () => {
+const checkPrice = () => {
+  const priceMin = +price.getAttribute('min');
   price.addEventListener('input', () => {
     if (price.value > MAX_PRICE) {
       price.setCustomValidity('Максимальное значение - 1000000');
+    } else if(price.value < priceMin) {
+      price.setCustomValidity(`Минимальное значение - ${priceMin.toLocaleString()}`);
     } else {
       price.setCustomValidity('');
     }
@@ -92,7 +95,6 @@ const changeTimeSelect = () => {
 };
 
 const changeMinPrice = () => {
-  const typeOfHousing = document.querySelector('#type');
   typeOfHousing.addEventListener('change', () => {
     const priceInput = MIN_PRICE[typeOfHousing.value];
     price.placeholder = priceInput;
@@ -138,11 +140,11 @@ const setUserFormSubmit = (onSuccess) => {
 };
 
 const initValidation = () => {
-  checkMaxPrice();
+  checkPrice();
   checkRoomsCapacity();
   changeTimeSelect();
   changeMinPrice();
   deactivatePage();
 };
 
-export {initValidation, activatePage, setUserFormSubmit};
+export {initValidation, activatePage, setUserFormSubmit, price};
