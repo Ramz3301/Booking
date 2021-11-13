@@ -3,6 +3,14 @@ import { createErrorMessage } from './popup.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+const MAX_PRICE = 1000000;
+const MIN_PRICE = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
+};
 const form = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const mapFiltersAll = mapFilters.querySelectorAll('.map__filter');
@@ -10,6 +18,8 @@ const mapFieldsets = mapFilters.querySelectorAll('fieldset');
 const formFieldsets = form.querySelectorAll('fieldset');
 const inputAdvertTitle = form.querySelector('#title');
 const price = form.querySelector('#price');
+
+
 inputAdvertTitle.addEventListener('input', () => {
   const valueLength = inputAdvertTitle.value.length;
   if (valueLength < MIN_TITLE_LENGTH) {
@@ -22,9 +32,10 @@ inputAdvertTitle.addEventListener('input', () => {
   inputAdvertTitle.reportValidity();
 });
 
+
 const checkMaxPrice = () => {
   price.addEventListener('input', () => {
-    if (price.value > 1000000) {
+    if (price.value > MAX_PRICE) {
       price.setCustomValidity('Максимальное значение - 1000000');
     } else {
       price.setCustomValidity('');
@@ -81,19 +92,11 @@ const changeTimeSelect = () => {
 };
 
 const changeMinPrice = () => {
-  const MIN_PRICE = {
-    bungalow: 0,
-    flat: 1000,
-    hotel: 3000,
-    house: 5000,
-    palace: 10000,
-  };
-
   const typeOfHousing = document.querySelector('#type');
   typeOfHousing.addEventListener('change', () => {
-    const priceSelect = MIN_PRICE[typeOfHousing.value];
-    price.placeholder = priceSelect;
-    price.min = priceSelect;
+    const priceInput = MIN_PRICE[typeOfHousing.value];
+    price.placeholder = priceInput;
+    price.min = priceInput;
   });
 };
 

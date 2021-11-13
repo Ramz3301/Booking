@@ -1,42 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
 
-function getRandomPositiveInteger (min, max) {
-  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
-  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-}
-
-getRandomPositiveInteger();
-
-function getRandomPositiveFloat (min, max, digits = 1) {
-  const lower = Math.min(Math.abs(min), Math.abs(max));
-  const upper = Math.max(Math.abs(max), Math.abs(min));
-
-  const result = Math.random() * (upper - lower) + lower;
-  return result.toFixed(digits);
-}
-
-getRandomPositiveFloat();
-
-
-function shuffle(elements) {
-  let currentIndex = elements.length, randomIndex;
-
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    [elements[currentIndex], elements[randomIndex]] = [elements[randomIndex], elements[currentIndex]];
-  }
-
-  return elements;
-}
-
-function sample(elements) {
-  return shuffle(elements).slice(getRandomPositiveInteger(0, elements.length - 1), elements.length);
-}
-
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
@@ -58,4 +21,4 @@ const showAlert = (message) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomPositiveInteger, getRandomPositiveFloat, sample, showAlert, isEscapeKey};
+export { showAlert, isEscapeKey};
