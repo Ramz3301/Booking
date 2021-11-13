@@ -1,19 +1,20 @@
 import { activatePage } from './form.js';
 import { createSimilarAdvert } from './popup.js';
+import { data } from './data.js';
 
 const SIMILAR_ADVERTS_COUNT = 10;
-const resetButton = document.querySelector('.ad-form__reset');
-const advertForm = document.querySelector('.ad-form');
-const mapFilters = document.querySelector('.map__filters');
 const LATITUDE = 35.6895000;
 const LONGITUDE = 139.6917100;
 const SCALE = 13;
-const mainIconUrl = 'img/main-pin.svg';
-const mainIconSize = [52, 52];
-const mainIconAnchor = [26, 52];
-const iconUrl = 'img/pin.svg';
 const iconSize = [40, 40];
 const iconAnchor = [20, 40];
+const mainIconSize = [52, 52];
+const mainIconAnchor = [26, 52];
+const resetButton = document.querySelector('.ad-form__reset');
+const advertForm = document.querySelector('.ad-form');
+const mapFilters = document.querySelector('.map__filters');
+const mainIconUrl = 'img/main-pin.svg';
+const iconUrl = 'img/pin.svg';
 const locationAddressInput = document.querySelector('#address');
 const map = L.map('map-canvas');
 const mainPinIcon = L.icon({
@@ -88,6 +89,7 @@ const clearForm = () => {
   mapFilters.reset();
   locationAddressInput.value = `${LATITUDE.toFixed(5)}, ${LONGITUDE.toFixed(5)}`;
   map.closePopup();
+  downloadMap(data.adverts);
   mainPinMarker.setLatLng({
     lat: LATITUDE,
     lng: LONGITUDE,
